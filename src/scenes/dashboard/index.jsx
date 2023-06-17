@@ -38,8 +38,6 @@ const Dashboard = () => {
 
   const userCount = isLoading ? 0 : users;
 
-  
-
   return (
     <Box m="0px 0px 0px 20px" overflow="scroll" height="100vh" p="0px 20px 0px 0px">
       <Topbar setIsSidebar={setIsSidebar} />
@@ -51,25 +49,26 @@ const Dashboard = () => {
       >
         {/* ROW 1 */}
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 3" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
-           <Link to="/orders" style={{ textDecoration: "none" }}>
-          <StatBox
-            subtitle="Orders"
-            increase="0"
-            icon={
-              <ShoppingCartIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          /></Link>
+          <Link to="/orders" style={{ textDecoration: "none" }}>
+            <StatBox
+              subtitle="Orders"
+              increase="0"
+              icon={
+                <ShoppingCartIcon
+                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                />
+              }
+            />
+          </Link>
         </Box>
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 3" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -86,49 +85,49 @@ const Dashboard = () => {
               }
             />
           </Link>
-
         </Box>
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 3" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
-           <Link to="/" style={{ textDecoration: "none" }}>
-          <StatBox
-            subtitle="Delivery Boys"
-            increase="0"
-            icon={
-              <GroupsIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          /></Link>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <StatBox
+              subtitle="Delivery Boys"
+              increase="0"
+              icon={
+                <GroupsIcon
+                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                />
+              }
+            />
+          </Link>
         </Box>
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 3" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
-            <Link to="/" style={{ textDecoration: "none" }}>
-          <StatBox
-            subtitle="Products"
-            increase="0"
-            icon={
-              <Inventory2SharpIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <StatBox
+              subtitle="Products"
+              increase="0"
+              icon={
+                <Inventory2SharpIcon
+                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                />
+              }
+            />
           </Link>
         </Box>
 
         {/* ROW 2 */}
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 2" }}
           backgroundColor={colors.primary[400]}
         >
@@ -151,7 +150,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 2" }}
           backgroundColor={colors.primary[400]}
           overflow="auto"
@@ -172,7 +171,7 @@ const Dashboard = () => {
 
         {/* ROW 3 */}
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
           gridRow={{ xs: "span 1", sm: "span 1.5" }}
           backgroundColor={colors.primary[400]}
           p="30px"
@@ -189,7 +188,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
           gridRow={{ xs: "span 1", sm: "span 1.5" }}
           backgroundColor={colors.primary[400]}
         >
@@ -203,7 +202,7 @@ const Dashboard = () => {
           </Typography>
         </Box>
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
           gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
           padding="30px"
@@ -220,7 +219,7 @@ const Dashboard = () => {
 
         {/* ROW 4 */}
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
         >
@@ -245,7 +244,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
         >
@@ -272,7 +271,7 @@ const Dashboard = () => {
 
         {/* ROW 5 */}
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
           gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
           p="30px"
@@ -289,7 +288,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
           gridRow={{ xs: "span 1", sm: "span 1.5" }}
           backgroundColor={colors.primary[400]}
         >
@@ -303,7 +302,7 @@ const Dashboard = () => {
           </Typography>
         </Box>
         <Box
-          gridColumn={{ xs: "span 6", sm: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
           gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
           padding="30px"
@@ -320,8 +319,8 @@ const Dashboard = () => {
 
         {/* ROW 6 */}
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6" }}
-          gridRow={{ xs: "span 1", sm: "span 2" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
+          gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
         >
           <Box
@@ -337,29 +336,38 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Top Sellers
+                <pre>i  0 Seller(s) pending for approval! <br></br>
+                  More info
+                </pre>
               </Typography>
             </Box>
           </Box>
         </Box>
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6" }}
-          gridRow={{ xs: "span 1", sm: "span 2" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
+          gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
-          overflow="auto"
         >
-          <Typography variant="h5" fontWeight="600">
-            Top Categories
-          </Typography>
           <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
             mt="25px"
+            p="0 30px"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
           >
+            <Box>
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                <pre>i  0 Seller(s) disabled! <br></br>
+                  More info
+                </pre>
+              </Typography>
+            </Box>
           </Box>
         </Box>
-        {/* row completed */}
       </Box>
     </Box>
   );
