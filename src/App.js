@@ -6,6 +6,7 @@ import CustomizedTables from "./scenes/dashboard/CustomizedTables";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import OrdersTable from "./scenes/dashboard/OrdersTable";
+import Product from "./scenes/dashboard/Product";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -23,7 +24,7 @@ function App() {
               <Route path="/orders" element={<OrdersTable/>} />
 
               <Route path="/allusers" element={<CustomizedTables />} />
-
+               <Route path="/product" element={<Product/>} />
             </Routes>
           </main>
         </div>

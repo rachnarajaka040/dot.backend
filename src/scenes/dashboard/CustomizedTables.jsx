@@ -12,6 +12,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dropdown from './Dropdown';
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: 'rgb(31, 42, 64)',
@@ -151,7 +152,23 @@ export default function CustomizedTables() {
       <div style={{ margin: '20px' }}>
           <StyledTableCell>
           <Dropdown onChange={handleDropdownChange} update={setUserType} updated={userType}/>
-                </StyledTableCell>
+          </StyledTableCell>
+          <StyledTableCell>
+  <button
+   
+    style={{
+      borderRadius: '4px',
+      padding: '5px 12px',
+      backgroundColor: 'white',
+      color: 'black',
+      border: 'none',
+      cursor: 'pointer',
+    }}
+  >
+    Admin
+  </button>
+</StyledTableCell>
+
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 400 }} aria-label="customized table">
             <TableHead>
@@ -178,6 +195,10 @@ export default function CustomizedTables() {
                   {showFilterInput && filterColumn === 'lastName' && (
                     <TextField value={filter} onChange={handleFilterChange} size="small" sx={{ left: '0',position:'absolute',backgroundColor:'black',color:'white',marginTop:'20px',marginLeft:'10px',border:'1px solid white' }} />
                   )}
+                </StyledTableCell>
+                <StyledTableCell>
+                  User Type
+                  
                 </StyledTableCell>
                 
                 <StyledTableCell>
@@ -209,11 +230,13 @@ export default function CustomizedTables() {
             <TableBody>
               {sortedUserData.length > 0 ? (
                 sortedUserData.map((user) => (
-                  <StyledTableRow key={user._id}>
+                  <StyledTableRow key={user._id} >
                     <StyledTableCell>{user.firstName}</StyledTableCell>
                     <StyledTableCell>{user.lastName}</StyledTableCell>
+                    <StyledTableCell>{user.adminType}</StyledTableCell>
                     <StyledTableCell>{user.email}</StyledTableCell>
                     <StyledTableCell>{user.mobile}</StyledTableCell>
+                    
                     <StyledTableCell>
                       <button
                         onClick={() => handleOpenModal(user)}
@@ -286,6 +309,7 @@ export default function CustomizedTables() {
               <p>
                 <strong>Last Name:</strong> {selectedUser.lastName}
               </p>
+            
               <p>
                 <strong>Email:</strong> {selectedUser.email}
               </p>

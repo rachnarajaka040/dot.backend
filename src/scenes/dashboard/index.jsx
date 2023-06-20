@@ -112,7 +112,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/product" style={{ textDecoration: "none" }}>
             <StatBox
               subtitle="Products"
               increase="0"
