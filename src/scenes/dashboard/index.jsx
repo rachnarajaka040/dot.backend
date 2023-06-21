@@ -1,9 +1,13 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography,Button, useTheme } from "@mui/material";
+import { colors } from "@mui/material";
+
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { tokens } from "../../theme";
 import { useState } from "react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import GroupsIcon from '@mui/icons-material/Groups';
+import TrackOrderIcon from '@material-ui/icons/TrackChanges';
+
 import Inventory2SharpIcon from '@mui/icons-material/Inventory2Sharp';
 import StatBox from "../../components/StatBox";
 import Topbar from "../global/Topbar";
@@ -16,7 +20,7 @@ const Dashboard = () => {
   const [isSidebar, setIsSidebar] = useState(true);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const isNonMobile = useMediaQuery("(min-width:600px)");
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -95,14 +99,15 @@ const Dashboard = () => {
         >
           <Link to="/" style={{ textDecoration: "none" }}>
             <StatBox
-              subtitle="Delivery Boys"
+              subtitle="Track Orders"
               increase="0"
               icon={
-                <GroupsIcon
+                <TrackOrderIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
                 />
               }
             />
+
           </Link>
         </Box>
         <Box
@@ -138,15 +143,36 @@ const Dashboard = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Product Sales
-              </Typography>
-            </Box>
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Typography variant="h5" fontWeight="600" color="white">
+          Product Sales
+        </Typography>
+        <Box marginLeft="210px">
+          <Button
+            variant="contained"
+            color="primary"
+           
+            sx={{ marginRight: "10px" }}
+          >
+            Day
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+           
+            sx={{ marginRight: "10px" }}
+          >
+            Week
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+           
+          >
+            Month
+          </Button>
+        </Box>
+      </Box>
           </Box>
         </Box>
         <Box

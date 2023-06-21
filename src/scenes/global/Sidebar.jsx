@@ -19,7 +19,7 @@ import StorefrontSharpIcon from "@mui/icons-material/StorefrontSharp";
 import PersonPinSharpIcon from "@mui/icons-material/PersonPinSharp";
 import Person4SharpIcon from "@mui/icons-material/Person4Sharp";
 import RequestQuoteSharpIcon from "@mui/icons-material/RequestQuoteSharp";
-
+import CategoryIcon from '@material-ui/icons/Category';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -84,7 +84,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                  Drift Of Thread
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -130,121 +130,124 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <SubMenu
-              title="Brands"
-              icon={<BarChartOutlinedIcon />}
-              defaultOpen={false}
-            >
-              <MenuItem>
-                <Link to="/orders">All Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/pending">Pending Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/delivered">Delivered Orders</Link>
-              </MenuItem>
-            </SubMenu>
+
 
             <SubMenu
-              title="Orders"
-              icon={<ShoppingCartIcon />}
+              title="Category"
+              icon={<CategoryIcon />}
               defaultOpen={false}
             >
-              <MenuItem>
-                <Link to="/orders">All Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/pending">Pending Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/delivered">Delivered Orders</Link>
-              </MenuItem>
-            </SubMenu>
+            <MenuItem>
+              <Link to="/orders">Pent</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/pending">Sarees</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/delivered">T-shirts</Link>
+            </MenuItem>
+          </SubMenu>
 
-            <SubMenu
-              title="Products"
-              icon={<CategorySharpIcon />}
-              defaultOpen={false}
-            >
-              <MenuItem>
-                <Link to="/orders">All Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/pending">Pending Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/delivered">Delivered Orders</Link>
-              </MenuItem>
-            </SubMenu>
+          <SubMenu
+            title="Orders"
+            icon={<ShoppingCartIcon />}
+            defaultOpen={false}
+          >
+            <MenuItem>
+              <Link to="/orders">All Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/pending">Pending Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/delivered">Delivered Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/delivered">Canceled Orders</Link>
+            </MenuItem>
+          </SubMenu>
 
-            <SubMenu
-              title="Sellers"
-              icon={<StorefrontSharpIcon />}
-              defaultOpen={false}
-            >
-              <MenuItem>
-                <Link to="/orders">All Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/pending">Pending Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/delivered">Delivered Orders</Link>
-              </MenuItem>
-            </SubMenu>
+          <SubMenu
+            title="Products"
+            icon={<CategorySharpIcon />}
+            defaultOpen={false}
+          >
+            <MenuItem>
+              <Link to="/productform">Add Product</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/product">View Product</Link>
+            </MenuItem>
+            
+          </SubMenu>
 
-            <SubMenu
-              title="Delivery Boys"
-              icon={<PersonPinSharpIcon />}
-              defaultOpen={false}
-            >
-              <MenuItem>
-                <Link to="/orders">All Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/pending">Pending Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/delivered">Delivered Orders</Link>
-              </MenuItem>
-            </SubMenu>
+          {/* <SubMenu
+            title="Sellers"
+            icon={<StorefrontSharpIcon />}
+            defaultOpen={false}
+          >
+            <MenuItem>
+              <Link to="/orders">All Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/pending">Pending Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/delivered">Delivered Orders</Link>
+            </MenuItem>
+          </SubMenu> */}
 
-            <SubMenu
-              title="Customer"
-              icon={<Person4SharpIcon />}
-              defaultOpen={false}
-            >
-              <MenuItem>
-                <Link to="/orders">All Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/pending">Pending Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/delivered">Delivered Orders</Link>
-              </MenuItem>
-            </SubMenu>
+          {/* <SubMenu
+            title="Delivery Boys"
+            icon={<PersonPinSharpIcon />}
+            defaultOpen={false}
+          >
+            <MenuItem>
+              <Link to="/orders">All Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/pending">Pending Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/delivered">Delivered Orders</Link>
+            </MenuItem>
+          </SubMenu> */}
 
-            <SubMenu
-              title="Payment Request"
-              icon={<RequestQuoteSharpIcon />}
-              defaultOpen={false}
-            >
-              <MenuItem>
-                <Link to="/orders">All Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/pending">Pending Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/orders/delivered">Delivered Orders</Link>
-              </MenuItem>
-            </SubMenu>
-          </Box>
-        </Menu>
-      </ProSidebar>
-    </Box>
+          <SubMenu
+            title="Customer"
+            icon={<Person4SharpIcon />}
+            defaultOpen={false}
+          >
+            <MenuItem>
+              <Link to="/orders">All Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/pending">Pending Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/delivered">Delivered Orders</Link>
+            </MenuItem>
+          </SubMenu>
+
+          <SubMenu
+            title="Payment Request"
+            icon={<RequestQuoteSharpIcon />}
+            defaultOpen={false}
+          >
+            <MenuItem>
+              <Link to="/o">All Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/pending">Pending Orders</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/orders/delivered">Delivered Orders</Link>
+            </MenuItem>
+          </SubMenu>
+        </Box>
+      </Menu>
+    </ProSidebar>
+    </Box >
   );
 };
 
