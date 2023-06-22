@@ -1,4 +1,4 @@
-import { Box, Typography,Button, useTheme } from "@mui/material";
+import { Box, Typography, Button, useTheme } from "@mui/material";
 import { colors } from "@mui/material";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -7,13 +7,13 @@ import { useState } from "react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import TrackOrderIcon from '@material-ui/icons/TrackChanges';
-
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import Inventory2SharpIcon from '@mui/icons-material/Inventory2Sharp';
 import StatBox from "../../components/StatBox";
 import Topbar from "../global/Topbar";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-
+import SalesChart from "./linechart/SalesChart";
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -39,7 +39,15 @@ const Dashboard = () => {
 
     fetchUsers();
   }, []);
-
+  const productSalesData = [
+    { name: "Jan", sales: 120 },
+    { name: "Feb", sales: 250 },
+    { name: "Mar", sales: 150 },
+    { name: "Apr", sales: 300 },
+    { name: "May", sales: 180 },
+    { name: "Jun", sales: 200 },
+    { name: "Jul", sales: 280 },
+  ];
   const userCount = isLoading ? 0 : users;
 
   return (
@@ -144,10 +152,8 @@ const Dashboard = () => {
             alignItems="center"
           >
             <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h5" fontWeight="600" color="white">
-          Product Sales
-        </Typography>
-        <Box marginLeft="210px">
+
+              {/* <Box marginLeft="210px">
           <Button
             variant="contained"
             color="primary"
@@ -171,8 +177,10 @@ const Dashboard = () => {
           >
             Month
           </Button>
-        </Box>
-      </Box>
+        </Box> */}
+
+            </Box>
+            <SalesChart data={productSalesData} />
           </Box>
         </Box>
         <Box

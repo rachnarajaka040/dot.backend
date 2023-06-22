@@ -8,6 +8,8 @@ import { ColorModeContext, useMode } from "./theme";
 import OrdersTable from "./scenes/dashboard/OrdersTable";
 import Product from "./scenes/dashboard/Product";
 import ProductForm from "./scenes/dashboard/ProductForm";
+import Setting from "./scenes/dashboard/Setting";
+
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -21,12 +23,14 @@ function App() {
 
             <Routes>
               <Route path="/" element={<Dashboard />} />
-         
-              <Route path="/orders" element={<OrdersTable/>} />
+
+              <Route path="/orders" element={<OrdersTable />} />
 
               <Route path="/allusers" element={<CustomizedTables />} />
-               <Route path="/product" element={<Product/>} />
-               <Route path="/productform" element={<ProductForm/>} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/productform" element={<ProductForm />} />
+              <Route path="/setting" element={<Setting />} />
+
             </Routes>
           </main>
         </div>

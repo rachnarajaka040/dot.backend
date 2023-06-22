@@ -230,19 +230,17 @@ const Sidebar = () => {
           </SubMenu>
 
           <SubMenu
-            title="Payment Request"
+            title="Payment"
             icon={<RequestQuoteSharpIcon />}
             defaultOpen={false}
           >
             <MenuItem>
-              <Link to="/o">All Orders</Link>
+              <Link to="/paid">Paid</Link>
             </MenuItem>
             <MenuItem>
-              <Link to="/orders/pending">Pending Orders</Link>
+              <Link to="/COD">COD</Link>
             </MenuItem>
-            <MenuItem>
-              <Link to="/orders/delivered">Delivered Orders</Link>
-            </MenuItem>
+            
           </SubMenu>
         </Box>
       </Menu>
