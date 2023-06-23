@@ -8,6 +8,7 @@ import {
   Link,
   Box,
 } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 import Logo from './logo.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -89,6 +90,9 @@ const Login = () => {
               value={emailPhone}
               onChange={handleEmailPhoneChange}
               required
+              InputProps={{
+                style: { color: '#FFFFFF' },
+              }}
             />
             <TextField
               label="Password"
@@ -97,6 +101,9 @@ const Login = () => {
               value={password}
               onChange={handlePasswordChange}
               required
+              InputProps={{
+                style: { color: '#FFFFFF' },
+              }}
             />
             <Button
               type="submit"
@@ -112,10 +119,13 @@ const Login = () => {
               </Link>
             </Typography>
             <Button
+              component={RouterLink}
+              to="/signup"
               variant="outlined"
               color="primary"
               fullWidth
               className={classes.button}
+              style={{ color: '#FFFFFF' }}
             >
               Create Account
             </Button>

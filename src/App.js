@@ -10,6 +10,7 @@ import Product from "./scenes/dashboard/Product";
 import ProductForm from "./scenes/dashboard/ProductForm";
 import Setting from "./scenes/dashboard/Setting";
 import Login from "./scenes/dashboard/Login";
+import Signup from "./scenes/dashboard/Signup";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -32,6 +33,7 @@ function App() {
               <Route path="/productform" element={<ProductForm />} />
               <Route path="/setting" element={<Setting />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup/>}/>
             </Routes>
           </main>
         </div>
