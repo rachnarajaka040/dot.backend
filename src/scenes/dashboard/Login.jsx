@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import axios from 'axios';
 import { Link as RouterLink } from 'react-router-dom';
-import Logo from './logo.png';
+import Logo from '../dashboard/images/logo.png';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -62,12 +62,12 @@ const Login = () => {
         })
     }
 
-
+    const loginUser=process.env.REACT_APP_API_URL_LOGIN;
     async function postUserLogin() {
 
         try {
             console.log("data1");
-            const response = await axios.post('http://localhost:4001/api/v1/user/login', data);
+            const response = await axios.post(`${loginUser}/user/login`, data);
             console.log("data");
             console.log('Response:', response.data);
 

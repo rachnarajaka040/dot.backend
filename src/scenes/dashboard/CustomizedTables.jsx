@@ -53,10 +53,14 @@ export default function CustomizedTables() {
   const [sortColumn, setSortColumn] = useState('firstName');
   const [sortOrder, setSortOrder] = useState('asc');
   const [userType, setUserType] = useState('all');
+
+
+  const allUser = process.env.REACT_APP_API_URL;
   useEffect(() => {
+
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:4001/api/v1/user/getusers/${userType}`);
+        const response = await fetch(`${allUser}/user/getusers/${userType}`);
 
         if (response.ok) {
           const data = await response.json();
@@ -100,10 +104,12 @@ export default function CustomizedTables() {
     setUserData(userData);
   };
 
+
+  const deletUser = process.env.REACT_APP_API_URL;
   const handleDeleteConfirmation = async (user) => {
     try {
       // Call the deleteUser API with the selectedUser ID
-      const response = await fetch(`http://localhost:4001/api/v1/user/delete/${user._id}`, {
+      const response = await fetch(`${deletUser}/user/delete/${user._id}`, {
         method: 'DELETE',
       });
 

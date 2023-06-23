@@ -1,13 +1,9 @@
-import { Box, Typography, Button, useTheme } from "@mui/material";
-import { colors } from "@mui/material";
-
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { useState } from "react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import TrackOrderIcon from '@material-ui/icons/TrackChanges';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import Inventory2SharpIcon from '@mui/icons-material/Inventory2Sharp';
 import StatBox from "../../components/StatBox";
 import Topbar from "../global/Topbar";
@@ -20,16 +16,18 @@ const Dashboard = () => {
   const [isSidebar, setIsSidebar] = useState(true);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const isNonMobile = useMediaQuery("(min-width:600px)");
+  
   useEffect(() => {
+    const countUser = process.env.REACT_APP_API_URL_COUNT;
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:4001/api/v1/user/counts');
+        const response = await fetch(`${countUser}/user/counts`);
         if (response.status === 200) {
           const data = await response.json();
           setIsLoading(false)
           setUsers(data.numbers);
         }
+        
       } catch (error) {
         console.error('Failed to fetch users:', error);
       } finally {

@@ -11,12 +11,11 @@ import { Link } from "react-router-dom";
 import 'react-pro-sidebar/dist/css/styles.css';
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CategorySharpIcon from "@mui/icons-material/CategorySharp";
-import StorefrontSharpIcon from "@mui/icons-material/StorefrontSharp";
-import PersonPinSharpIcon from "@mui/icons-material/PersonPinSharp";
+
 import Person4SharpIcon from "@mui/icons-material/Person4Sharp";
 import RequestQuoteSharpIcon from "@mui/icons-material/RequestQuoteSharp";
 import CategoryIcon from '@material-ui/icons/Category';

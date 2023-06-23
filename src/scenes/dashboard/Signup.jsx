@@ -14,7 +14,7 @@ import {
   FormLabel,
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
-import Logo from './logo.png';
+import Logo from '../dashboard/images/logo.png';
 import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -68,10 +68,11 @@ const Signup = () => {
     })
     
   }
+  const signupUser=process.env.REACT_APP_API_URL_SIGNUP;
   async function postUserSignUp() {
     try {
       console.log("data1");
-      const response = await axios.post('http://localhost:4001/api/v1/user/register',data);
+      const response = await axios.post(`${signupUser}`,data);
       console.log("data");
       console.log('Response:', response.data);
       return response.data;

@@ -36,11 +36,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function Product() {
   const [product, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const userProduct=process.env.REACT_APP_API_URL;
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:4001/api/v1/products/get_all_Products');
+        const response = await fetch(`${userProduct}/products/get_all_Products`);
         if (response.ok) {
           const data = await response.json();
           setProducts(data);

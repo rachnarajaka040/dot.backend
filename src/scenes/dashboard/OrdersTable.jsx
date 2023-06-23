@@ -40,11 +40,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function OrdersTable() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+   const userOrder=process.env.REACT_APP_API_URL;
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:4001/api/v1/orders/orders');
+        const response = await fetch(`${userOrder}/orders/orders`);
         if (response.ok) {
           const data = await response.json();
           setOrders(data);
@@ -62,11 +62,7 @@ export default function OrdersTable() {
     fetchOrders();
   }, []);
 
-  // const handleDownloadInvoice = (orderId) => {
-  //   // Generate the download link based on the orderId
-  //   const invoiceDownloadLink = `http://localhost:4001/api/v1/orders/download-invoice/${orderId}`;
-  //   window.open(invoiceDownloadLink, '_blank');
-  // };
+ 
 
   const handleDownloadInvoice = () => {
     // Replace the dummy link with your actual download logic

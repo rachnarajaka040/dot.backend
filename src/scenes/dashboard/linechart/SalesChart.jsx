@@ -8,7 +8,7 @@ import {
   Legend,
   Line,
 } from "recharts";
-import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box,useMediaQuery, useTheme } from "@mui/material";
 
 const SalesChart = ({ data }) => {
   const theme = useTheme();
@@ -23,14 +23,7 @@ const SalesChart = ({ data }) => {
 
   return (
     <Box marginTop="40px" marginRight="100px">
-      {/* <Typography
-        variant={isNonMobile ? "h5" : "h6"}
-        component="div"
-        color={colors.white}
-        align={isNonMobile ? "left" : "center"}
-      >
-        Product Sales
-      </Typography> */}
+     
       <LineChart
         width={isNonMobile ? 400 : 300}
         height={isNonMobile ? 200 : 150}
