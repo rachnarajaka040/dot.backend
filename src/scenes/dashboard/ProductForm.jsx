@@ -167,7 +167,7 @@ const ProductForm = () => {
               color:"black",
               borderRadius: '4px',
               padding: '5px 12px',
-              backgroundColor: 'white',
+            
               border: 'none',
               cursor: 'pointer',
               "&:hover": {
