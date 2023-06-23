@@ -1,3 +1,4 @@
+import axios from "axios";
 
 export const filterUsers = async (type, updater) => {
     try {

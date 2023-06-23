@@ -5,15 +5,18 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function Dropdown({ onChange, update, updated, data, apiFunction, updater }) {
+export default function Dropdown({ updated, data, apiFunction, updater }) {
 
   return (
     <Box sx={{ minWidth: 50 }}>
       <FormControl fullWidth>
-        <Select value={updated} onChange={handleUserTypeChange} label="User Type">
+        <Select value={updated} label="User Type" onCLick={(e) => {
+          console.log(e.target.value);
+          apiFunction(e.target.value, updater)
+        }}>
           {
             data && data.map(({ name, value }, index) =>
-              <MenuItem key={index} value={value} onCLick={() => apiFunction(e.target.value, updater)} >{name}</MenuItem>)
+              <MenuItem key={index} value={value}  >{name}</MenuItem>)
           }
         </Select>
       </FormControl>
