@@ -12,6 +12,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dropdown from './Dropdown';
+import { filterUsers } from "../../apis/users.js"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -25,7 +26,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
   filterIcon: {
-  
+
     top: '50%',
     right: '4px',
     transform: 'translateY(-50%)',
@@ -56,7 +57,7 @@ export default function CustomizedTables() {
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:4001/api/v1/user/getusers/${userType}`);
-        
+
         if (response.ok) {
           const data = await response.json();
           setUserData(data);
@@ -148,26 +149,30 @@ export default function CustomizedTables() {
 
   return (
     <React.Fragment>
-      
+
       <div style={{ margin: '20px' }}>
-          <StyledTableCell>
-          <Dropdown onChange={handleDropdownChange} update={setUserType} updated={userType}/>
-          </StyledTableCell>
-          <StyledTableCell>
-  <button
-   
-    style={{
-      borderRadius: '4px',
-      padding: '5px 12px',
-      backgroundColor: 'white',
-      color: 'black',
-      border: 'none',
-      cursor: 'pointer',
-    }}
-  >
-    Admin
-  </button>
-</StyledTableCell>
+        <StyledTableCell>
+          <Dropdown onChange={handleDropdownChange} update={setUserType} updated={userType} data={[
+            { value: "all", name: "All" },
+            { value: "admin", name: "Admin" },
+            { value: "customer", name: "Customer" },
+          ]} apiFunction={filterUsers} updater={setUserData} />
+        </StyledTableCell>
+        <StyledTableCell>
+          <button
+
+            style={{
+              borderRadius: '4px',
+              padding: '5px 12px',
+              backgroundColor: 'white',
+              color: 'black',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Admin
+          </button>
+        </StyledTableCell>
 
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 400 }} aria-label="customized table">
@@ -181,7 +186,7 @@ export default function CustomizedTables() {
                     sx={{ margin: '0px 0px -8px 2px' }}
                   />
                   {showFilterInput && filterColumn === 'firstName' && (
-                    <TextField value={filter} onChange={handleFilterChange} size="small" sx={{ left: '0',position:'absolute',backgroundColor:'black',color:'white',marginTop:'20px',marginLeft:'10px',border:'1px solid white' }} />
+                    <TextField value={filter} onChange={handleFilterChange} size="small" sx={{ left: '0', position: 'absolute', backgroundColor: 'black', color: 'white', marginTop: '20px', marginLeft: '10px', border: '1px solid white' }} />
                   )}
                 </StyledTableCell>
 
@@ -193,14 +198,14 @@ export default function CustomizedTables() {
                     sx={{ margin: '0px 0px -8px 2px' }}
                   />
                   {showFilterInput && filterColumn === 'lastName' && (
-                    <TextField value={filter} onChange={handleFilterChange} size="small" sx={{ left: '0',position:'absolute',backgroundColor:'black',color:'white',marginTop:'20px',marginLeft:'10px',border:'1px solid white' }} />
+                    <TextField value={filter} onChange={handleFilterChange} size="small" sx={{ left: '0', position: 'absolute', backgroundColor: 'black', color: 'white', marginTop: '20px', marginLeft: '10px', border: '1px solid white' }} />
                   )}
                 </StyledTableCell>
                 <StyledTableCell>
                   User Type
-                  
+
                 </StyledTableCell>
-                
+
                 <StyledTableCell>
                   Email
                   <FilterListIcon
@@ -209,7 +214,7 @@ export default function CustomizedTables() {
                     sx={{ margin: '0px 0px -8px 2px' }}
                   />
                   {showFilterInput && filterColumn === 'email' && (
-                    <TextField value={filter} onChange={handleFilterChange} size="small" sx={{ left: '0',position:'absolute',backgroundColor:'black',color:'white',marginTop:'20px',marginLeft:'10px',border:'1px solid white' }}/>
+                    <TextField value={filter} onChange={handleFilterChange} size="small" sx={{ left: '0', position: 'absolute', backgroundColor: 'black', color: 'white', marginTop: '20px', marginLeft: '10px', border: '1px solid white' }} />
                   )}
                 </StyledTableCell>
                 <StyledTableCell>
@@ -220,7 +225,7 @@ export default function CustomizedTables() {
                     sx={{ margin: '0px 0px -8px 2px' }}
                   />
                   {showFilterInput && filterColumn === 'mobile' && (
-                    <TextField value={filter} onChange={handleFilterChange} size="small" sx={{ left: '0',position:'absolute',backgroundColor:'black',color:'white',marginTop:'20px',marginLeft:'10px',border:'1px solid white' }}/>
+                    <TextField value={filter} onChange={handleFilterChange} size="small" sx={{ left: '0', position: 'absolute', backgroundColor: 'black', color: 'white', marginTop: '20px', marginLeft: '10px', border: '1px solid white' }} />
                   )}
                 </StyledTableCell>
                 <StyledTableCell onClick={() => handleSortColumn('firstName')}>All Details</StyledTableCell>
@@ -236,7 +241,7 @@ export default function CustomizedTables() {
                     <StyledTableCell>{user.adminType}</StyledTableCell>
                     <StyledTableCell>{user.email}</StyledTableCell>
                     <StyledTableCell>{user.mobile}</StyledTableCell>
-                    
+
                     <StyledTableCell>
                       <button
                         onClick={() => handleOpenModal(user)}
@@ -268,7 +273,7 @@ export default function CustomizedTables() {
                         }}
                       >
                         <DeleteIcon style={{ marginRight: '4px' }} />
-                      
+
                       </button>
                     </StyledTableCell>
                   </StyledTableRow>
@@ -309,7 +314,7 @@ export default function CustomizedTables() {
               <p>
                 <strong>Last Name:</strong> {selectedUser.lastName}
               </p>
-            
+
               <p>
                 <strong>Email:</strong> {selectedUser.email}
               </p>
