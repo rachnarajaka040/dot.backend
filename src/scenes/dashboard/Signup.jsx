@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from './logo.png';
-
+import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
@@ -60,57 +60,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Signup = () => {
-  const classes = useStyles();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [gender, setGender] = useState('');
+    const classes = useStyles();
+    const [data ,setData]=useState({});
+  function handleChange(e){
+    setData({
+      ...data,[e.target.name]:e.target.value
+    })
+    
+  }
+  async function postUserSignUp() {
+    try {
+      console.log("data1");
+      const response = await axios.post('http://localhost:4001/api/v1/user/register',data);
+      console.log("data");
+      console.log('Response:', response.data);
+      return response.data;
+    }
+    catch (error) { console.error('Error:', error.response.data); throw error; }
+  }
 
-  const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
-  };
-
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleGenderChange = (e) => {
-    setGender(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Perform signup logic here
-    console.log('First Name:', firstName);
-    console.log('Last Name:', lastName);
-    console.log('Email:', email);
-    console.log('Phone Number:', phoneNumber);
-    console.log('Password:', password);
-    console.log('Gender:', gender);
-    // Reset form fields
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPhoneNumber('');
-    setPassword('');
-    setGender('');
-  };
-
-  return (
+   return (
     <Box className={classes.container}>
       <Container maxWidth="xs">
         <Box className={classes.formContainer}>
@@ -118,13 +87,13 @@ const Signup = () => {
           <Typography variant="h4" align="center" gutterBottom>
             Signup
           </Typography>
-          <form onSubmit={handleSubmit}>
+          <form>
             <TextField
               label="First Name"
               type="text"
               className={classes.textField}
-              value={firstName}
-              onChange={handleFirstNameChange}
+              onChange={handleChange}
+               name="firstName"
               required
               InputProps={{
                 style: { color: '#FFFFFF' },
@@ -134,8 +103,8 @@ const Signup = () => {
               label="Last Name"
               type="text"
               className={classes.textField}
-              value={lastName}
-              onChange={handleLastNameChange}
+              onChange={handleChange}
+               name="lastName"
               required
               InputProps={{
                 style: { color: '#FFFFFF' },
@@ -145,8 +114,8 @@ const Signup = () => {
               label="Email"
               type="email"
               className={classes.textField}
-              value={email}
-              onChange={handleEmailChange}
+              onChange={handleChange} 
+              name="email"
               required
               InputProps={{
                 style: { color: '#FFFFFF' },
@@ -156,8 +125,8 @@ const Signup = () => {
               label="Phone Number"
               type="text"
               className={classes.textField}
-              value={phoneNumber}
-              onChange={handlePhoneNumberChange}
+              onChange={handleChange}
+               name="mobile"
               required
               InputProps={{
                 style: { color: '#FFFFFF' },
@@ -167,8 +136,8 @@ const Signup = () => {
               label="Password"
               type="password"
               className={classes.textField}
-              value={password}
-              onChange={handlePasswordChange}
+              onChange={handleChange}
+               name="password"
               required
               InputProps={{
                 style: { color: '#FFFFFF' },
@@ -179,8 +148,7 @@ const Signup = () => {
               <RadioGroup
                 aria-label="gender"
                 name="gender"
-                value={gender}
-                onChange={handleGenderChange}
+                onChange={handleChange}
                 row
               >
                 <FormControlLabel
@@ -200,6 +168,7 @@ const Signup = () => {
               variant="contained"
               color="primary"
               className={classes.button}
+              onClick={postUserSignUp}
             >
               Signup
             </Button>
