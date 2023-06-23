@@ -9,6 +9,7 @@ import OrdersTable from "./scenes/dashboard/OrdersTable";
 import Product from "./scenes/dashboard/Product";
 import ProductForm from "./scenes/dashboard/ProductForm";
 import Setting from "./scenes/dashboard/Setting";
+import Login from "./scenes/dashboard/Login";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -30,7 +31,7 @@ function App() {
               <Route path="/product" element={<Product />} />
               <Route path="/productform" element={<ProductForm />} />
               <Route path="/setting" element={<Setting />} />
-
+              <Route path="/login" element={<Login />} />
             </Routes>
           </main>
         </div>

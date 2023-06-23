@@ -42,7 +42,7 @@ function Setting() {
 
             {selectedImages.length > 0 && (
                 <div>
-                    <h2 className="uploaded-heading">Uploaded Images:</h2>
+                    <h2 className="uploaded-heading" color="white">Uploaded Images:</h2>
                     <div className="image-container">
                         {selectedImages.map((image, index) => (
                             <div key={index} className="image-card">
