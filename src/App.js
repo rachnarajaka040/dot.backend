@@ -16,10 +16,12 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   
-  
-  
-  
+ 
+ console.log(process.env.REACT_APP_GET_USER_DELETE);
+
+
   return (
+
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -28,7 +30,7 @@ function App() {
           <main className="content">
 
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Login/>} />
 
               <Route path="/orders" element={<OrdersTable />} />
 
@@ -36,7 +38,7 @@ function App() {
               <Route path="/product" element={<Product />} />
               <Route path="/productform" element={<ProductForm />} />
               <Route path="/setting" element={<Setting />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/signup" element={<Signup/>}/>
             </Routes>
           </main>

@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-
+import { addProduct } from '../../apis/users';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: 'rgb(31, 42, 64)',
@@ -21,7 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
   },
- 
+
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -36,38 +36,42 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function Product() {
   const [product, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const userProduct=process.env.REACT_APP_API_URL;
+
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await fetch(`${process.env.REACT_APP_GET_USER_PRODUCT}`);
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setProducts(data);
+  //         console.log('fetch the data');
+  //       } else {
+  //         throw new Error('Failed to fetch orders.');
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, []);
+
+
+  //addproduct
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(`${userProduct}/products/get_all_Products`);
-        if (response.ok) {
-          const data = await response.json();
-          setProducts(data);
-          console.log('fetch the data');
-        } else {
-          throw new Error('Failed to fetch orders.');
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  
+    addProduct(setProducts);
+  }, [])
 
 
-  
+
   return (
     <React.Fragment>
       <div style={{ margin: '30px' }} >
-       
+
         <TableContainer >
-          <Table sx={{ minWidth:300 }} aria-label="customized table">
+          <Table sx={{ minWidth: 300 }} aria-label="customized table">
             <TableHead>
               <TableRow>
                 <StyledTableCell>Product Name</StyledTableCell>
@@ -121,17 +125,17 @@ export default function Product() {
                     <StyledTableCell>{order.madeIn}</StyledTableCell>
                     <StyledTableCell>{order.brand}</StyledTableCell>
                     <StyledTableCell>{order.totalAllowedQuantity}</StyledTableCell>
-   
+
                     <StyledTableCell>{order.minOrderQuantity}</StyledTableCell>
-   
+
                     <StyledTableCell>{order.qualityStepSize}</StyledTableCell>
-   
+
                     <StyledTableCell>{order.warrantyPeriod}</StyledTableCell>
-   
+
                     <StyledTableCell>{order.guaranteePeriod}</StyledTableCell>
-   
+
                     <StyledTableCell>{order.deliverableType}</StyledTableCell>
-   
+
                     <StyledTableCell>{order.deliverableZipcodes}</StyledTableCell>
                     <StyledTableCell>{order.hsnCode}</StyledTableCell>
                     <StyledTableCell>{order.taxIncludedPrice}</StyledTableCell>
@@ -145,19 +149,19 @@ export default function Product() {
                     <StyledTableCell>{order.productVideo}</StyledTableCell>
                     <StyledTableCell>{order.description}</StyledTableCell>
                     <StyledTableCell>
-        <EditIcon />
-       
-    </StyledTableCell>
-    <StyledTableCell>
-       
-        <DeleteIcon />
-       
-    </StyledTableCell>
-    <StyledTableCell>
-        
-        <VisibilityIcon />
-    </StyledTableCell>
-   
+                      <EditIcon />
+
+                    </StyledTableCell>
+                    <StyledTableCell>
+
+                      <DeleteIcon />
+
+                    </StyledTableCell>
+                    <StyledTableCell>
+
+                      <VisibilityIcon />
+                    </StyledTableCell>
+
                   </StyledTableRow>
                 ))
               )}

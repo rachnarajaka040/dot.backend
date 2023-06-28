@@ -1,0 +1,25 @@
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) {
+    .tableContainer {
+      overflow-x: auto;
+      
+    }
+  }
+  
+  /* Responsive styles for larger screens */
+  @media (min-width: 1024px) {
+    .tableContainer {
+      width: 800px;
+      margin: 0 auto;
+    }
+  }
+
+  /* Responsive styles for medium screens */
+@media (max-width: 960px) {
+    .tableContainer {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  

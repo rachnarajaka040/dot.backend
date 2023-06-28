@@ -12,8 +12,9 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dropdown from './Dropdown';
-import { filterUsers } from "../../apis/users.js"
-
+import { filterUsers } from "../../apis/users.js";
+import { deleteUsers } from "../../apis/users.js";
+import './table.css';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: 'rgb(31, 42, 64)',
@@ -43,6 +44,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+
 export default function CustomizedTables() {
   const [userData, setUserData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -55,26 +57,35 @@ export default function CustomizedTables() {
   const [userType, setUserType] = useState('all');
 
 
-  const allUser = process.env.REACT_APP_API_URL;
+
+  //console.log(getUserUrl);
+  // useEffect(() => {
+
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(`${process.env.REACT_APP_GET_ALL_USER}/${userType}`);
+
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setUserData(data);
+  //       } else {
+  //         throw new Error('User not found');
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [userType]);
+
+
+
+  //getalluser
   useEffect(() => {
-
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${allUser}/user/getusers/${userType}`);
-
-        if (response.ok) {
-          const data = await response.json();
-          setUserData(data);
-        } else {
-          throw new Error('User not found');
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, [userType]);
+    console.log("run");
+    filterUsers(userType, setUserData);
+  }, [userType])
 
   const handleOpenModal = (user) => {
     setSelectedUser(user);
@@ -100,29 +111,29 @@ export default function CustomizedTables() {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
-  const handleDropdownChange = (userData) => {
-    setUserData(userData);
+  const handleDropdownChange = (e) => {
+    setUserType(e.target.value);
   };
 
+  //delete user
+  const handleDeleteConfirmation = async (userId) => {
+    // try {
+    //    // Call the deleteUser API with the selectedUser ID
+    //   const response = await fetch(`${process.env.REACT_APP_GET_USER_DELETE}/${userId}`, {
+    //     method: 'DELETE',
+    //   });
 
-  const deletUser = process.env.REACT_APP_API_URL;
-  const handleDeleteConfirmation = async (user) => {
-    try {
-      // Call the deleteUser API with the selectedUser ID
-      const response = await fetch(`${deletUser}/user/delete/${user._id}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        // User deletion successful
-        const newData = userData.filter((u) => u._id !== user._id);
-        setUserData(newData);
-      } else {
-        throw new Error('User deletion failed.');
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    //   if (response.ok) {
+    //     // User deletion successful
+    //     const newData = userData.filter((u) => u._id !== userId);
+    //     setUserData(newData);
+    //   } else {
+    //     throw new Error('User deletion failed.');
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    deleteUsers(setUserData, userId);
   };
 
   const filteredUserData = userData.filter((user) => {
@@ -158,11 +169,11 @@ export default function CustomizedTables() {
 
       <div style={{ margin: '20px' }}>
         <StyledTableCell>
-          <Dropdown onChange={handleDropdownChange} update={setUserType} updated={userType} data={[
+          <Dropdown onChanger={handleDropdownChange} update={userType} data={[
             { value: "all", name: "All" },
             { value: "admin", name: "Admin" },
             { value: "customer", name: "Customer" },
-          ]} apiFunction={filterUsers} updater={setUserData} />
+          ]} />
         </StyledTableCell>
         <StyledTableCell>
           <button
@@ -180,7 +191,7 @@ export default function CustomizedTables() {
           </button>
         </StyledTableCell>
 
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} >
           <Table sx={{ minWidth: 400 }} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -236,6 +247,7 @@ export default function CustomizedTables() {
                 </StyledTableCell>
                 <StyledTableCell onClick={() => handleSortColumn('firstName')}>All Details</StyledTableCell>
                 <StyledTableCell>Delete</StyledTableCell>
+                <StyledTableCell>convert</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -265,7 +277,7 @@ export default function CustomizedTables() {
                     </StyledTableCell>
                     <StyledTableCell>
                       <button
-                        onClick={() => handleDeleteConfirmation(user)}
+                        onClick={() => handleDeleteConfirmation(user._id)}
                         style={{
                           display: 'flex',
                           alignItems: 'center',
@@ -281,6 +293,13 @@ export default function CustomizedTables() {
                         <DeleteIcon style={{ marginRight: '4px' }} />
 
                       </button>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <Dropdown  data={[
+                        { value: "all", name: "All" },
+                        { value: "admin", name: "Admin" },
+                        { value: "customer", name: "Customer" },
+                      ]} />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))

@@ -11,7 +11,8 @@ import {
 import axios from 'axios';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from '../dashboard/images/logo.png';
-
+import { userLogin } from '../../apis/users';
+import { useNavigate } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
@@ -55,34 +56,44 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
     const classes = useStyles();
     const [data, setData] = useState({});
-
+    const navigate = useNavigate();
     function handleChange(e) {
         setData({
             ...data, [e.target.name]: e.target.value
         })
     }
 
-    const loginUser=process.env.REACT_APP_API_URL_LOGIN;
-    async function postUserLogin() {
+    async function handleFormInput(e){
+        e.preventDefault();
+        console.log(data);
+        userLogin(data);
+        console.log(userLogin(data)+"databse");
+        navigate('/dashboard');
+       }
+    
+    // async function postUserLogin() {
 
-        try {
-            console.log("data1");
-            const response = await axios.post(`${loginUser}/user/login`, data);
-            console.log("data");
-            console.log('Response:', response.data);
+    //     try {
+    //         console.log("data1");
+    //         const response = await axios.post(`${process.env.REACT_APP_GET_USER_LOGIN}`, data);
+    //         console.log("data");
+    //         console.log('Response:', response.data);
 
-            return response.data;
-        } catch (error) {
-            if (error.response && error.response.data) {
-                console.error('Error:', error.response.data);
-            } else {
-                console.error('Error:', error.message);
-            }
-            throw error;
-        }
-    }
+    //         return response.data;
+    //     } catch (error) {
+    //         if (error.response && error.response.data) {
+    //             console.error('Error:', error.response.data);
+    //         } else {
+    //             console.error('Error:', error.message);
+    //         }
+    //         throw error;
+    //     }
+    // }
 
+    //login
+    
 
+   
     return (
         <Box className={classes.container}>
             <Container maxWidth="xs">
@@ -91,7 +102,7 @@ const Login = () => {
                     <Typography variant="h4" align="center" gutterBottom>
                         Login
                     </Typography>
-                    <form >
+                    <form onSubmit={handleFormInput}>
                         <TextField
                             label="Email or Phone"
                             type="text"
@@ -122,7 +133,7 @@ const Login = () => {
                             type="submit"
                             variant="contained"
                             color="primary"
-                            onClick={postUserLogin}
+                            
                             className={classes.button}
                         >
                             Login

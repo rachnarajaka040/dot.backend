@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import DownloadIcon from '@mui/icons-material/Download';
-
+import { fetchOrders, downloadInvoice } from '../../apis/users'; // Assuming you have the downloadInvoice API function
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: 'rgb(31, 42, 64)',
@@ -40,40 +40,45 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function OrdersTable() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-   const userOrder=process.env.REACT_APP_API_URL;
+
+  // useEffect(() => {
+  //   const fetchOrders = async () => {
+  //     try {
+  //       const response = await fetch(`${process.env.REACT_APP_GET_USER_ORDER}`);
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setOrders(data);
+  //         console.log('fetch the data');
+  //       } else {
+  //         throw new Error('Failed to fetch orders.');
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchOrders();
+  // }, []);
+
+  //orderproduct
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch(`${userOrder}/orders/orders`);
-        if (response.ok) {
-          const data = await response.json();
-          setOrders(data);
-          console.log('fetch the data');
-        } else {
-          throw new Error('Failed to fetch orders.');
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    fetchOrders(setOrders);
+  }, [])
 
-    fetchOrders();
-  }, []);
-
- 
-
-  const handleDownloadInvoice = () => {
-    // Replace the dummy link with your actual download logic
-    const invoiceDownloadLink = 'https://example.com/invoice.pdf';
-    window.open(invoiceDownloadLink, '_blank');
+  const handleDownloadInvoice = async (orderId) => {
+    try {
+      await downloadInvoice(orderId);
+    } catch (error) {
+      console.error(error);
+    }
   };
   
   return (
     <React.Fragment>
       <div style={{ margin: '20px' }}>
-       
+
         <TableContainer>
           <Table sx={{ minWidth: 400 }} aria-label="customized table">
             <TableHead>
@@ -105,9 +110,9 @@ export default function OrdersTable() {
                     <StyledTableCell>{order.productName}</StyledTableCell>
                     <StyledTableCell>{order.paymentMode}</StyledTableCell>
                     <StyledTableCell>{order.isDelivered ? 'Yes' : 'No'}</StyledTableCell>
-                    <StyledTableCell> <Button variant="contained" startIcon={<DownloadIcon />} onClick={handleDownloadInvoice}>
-           Invoice
-        </Button></StyledTableCell>
+                    <StyledTableCell> <Button variant="contained" startIcon={<DownloadIcon />} onClick={()=>handleDownloadInvoice(order._id)}>
+                      Invoice
+                    </Button></StyledTableCell>
                   </StyledTableRow>
                 ))
               )}

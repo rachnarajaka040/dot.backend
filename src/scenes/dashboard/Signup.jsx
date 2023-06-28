@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from '../dashboard/images/logo.png';
+import { userSignup } from '../../apis/users';
 import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -62,23 +63,32 @@ const useStyles = makeStyles((theme) => ({
 const Signup = () => {
     const classes = useStyles();
     const [data ,setData]=useState({});
-  function handleChange(e){
+   function handleChange(e){
     setData({
       ...data,[e.target.name]:e.target.value
     })
+    console.log(data);
     
   }
-  const signupUser=process.env.REACT_APP_API_URL_SIGNUP;
-  async function postUserSignUp() {
-    try {
-      console.log("data1");
-      const response = await axios.post(`${signupUser}`,data);
-      console.log("data");
-      console.log('Response:', response.data);
-      return response.data;
-    }
-    catch (error) { console.error('Error:', error.response.data); throw error; }
+  
+  async function handleFormInput(e){
+   e.preventDefault();
+   console.log(data);
+   userSignup (data);
+   console.log(userSignup(data)+"databse");
   }
+  // //signup
+  // async function postUserSignUp() {
+  //   try {
+  //     console.log("data1");
+  //     const response = await axios.post(`${process.env.REACT_APP_GET_USER_REGISTER}`,data);
+  //     console.log("data");
+  //     console.log('Response:', response.data);
+  //     return response.data;
+  //   }
+  //   catch (error) { console.error('Error:', error.response.data); throw error; }
+              
+  // }
 
    return (
     <Box className={classes.container}>
@@ -88,7 +98,7 @@ const Signup = () => {
           <Typography variant="h4" align="center" gutterBottom>
             Signup
           </Typography>
-          <form>
+           <form onSubmit={handleFormInput}>
             <TextField
               label="First Name"
               type="text"
@@ -169,13 +179,13 @@ const Signup = () => {
               variant="contained"
               color="primary"
               className={classes.button}
-              onClick={postUserSignUp}
+             
             >
               Signup
             </Button>
             <Typography variant="body2" align="center">
               Already have an account?{' '}
-              <Link component={RouterLink} to="/login" className={classes.link}>
+              <Link component={RouterLink} to="/" className={classes.link}>
                 Login
               </Link>
             </Typography>

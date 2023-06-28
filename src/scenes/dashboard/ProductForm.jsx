@@ -16,8 +16,8 @@ const ProductForm = () => {
 
   return (
     <Box m="20px">
-     
-     {/* <h2>Add Product</h2> Heading Section */}
+
+      {/* <h2>Add Product</h2> Heading Section */}
       <form onSubmit={handleSubmit}>
         <Box
           display="grid"
@@ -59,7 +59,7 @@ const ProductForm = () => {
             name="category"
             sx={{ gridColumn: "span 2" }}
           />
-           <TextField
+          <TextField
             fullWidth
             variant="filled"
             type="text"
@@ -91,7 +91,7 @@ const ProductForm = () => {
             name="MadeIn"
             sx={{ gridColumn: "span 2" }}
           />
-           <TextField
+          <TextField
             fullWidth
             variant="filled"
             type="text"
@@ -123,7 +123,7 @@ const ProductForm = () => {
             name="category"
             sx={{ gridColumn: "span 2" }}
           />
-           <TextField
+          <TextField
             fullWidth
             variant="filled"
             type="text"
@@ -163,15 +163,15 @@ const ProductForm = () => {
             color="secondary"
             variant="contained"
             sx={{
-              backgroundColor:"white",
-              color:"black",
+              backgroundColor: "white",
+              color: "black",
               borderRadius: '4px',
               padding: '5px 12px',
-            
+
               border: 'none',
               cursor: 'pointer',
               "&:hover": {
-                backgroundColor:"dark",
+                backgroundColor: "dark",
               },
             }}
           >
@@ -179,7 +179,7 @@ const ProductForm = () => {
           </Button>
 
 
-          
+
         </Box>
 
 

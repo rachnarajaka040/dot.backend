@@ -10,33 +10,99 @@ import Topbar from "../global/Topbar";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import SalesChart from "./linechart/SalesChart";
+import {countUsers,countOrder,countProduct} from "../../apis/users.js";
+
+
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isSidebar, setIsSidebar] = useState(true);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  
-  useEffect(() => {
-    const countUser = process.env.REACT_APP_API_URL_COUNT;
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(`${countUser}/user/counts`);
+  const [orderCount, setOrderCount] = useState(0);
+  const [productCount, setProductCount] = useState(0);
+
+   useEffect(() => {
+   
+   const fetchUsers = async () => {
+     try {
+       const response = await fetch(`${process.env.REACT_APP_GET_USER_COUNT}`);
         if (response.status === 200) {
-          const data = await response.json();
-          setIsLoading(false)
-          setUsers(data.numbers);
+         const data = await response.json();
+         setIsLoading(false)
+         setUsers(data.numbers);
         }
         
-      } catch (error) {
+     } catch (error) {
         console.error('Failed to fetch users:', error);
       } finally {
         setIsLoading(false);
-      }
-    };
+     }
+   };
 
-    fetchUsers();
-  }, []);
+   fetchUsers();
+ }, []);
+
+  useEffect(()=>{
+   
+   countOrder(setOrderCount);
+   
+  },[])
+
+  // useEffect(()=>{
+  //   countUsers(setUsers);
+  //  },[])
+
+   useEffect(()=>{
+    countProduct(setProductCount);
+   },[])
+
+  // useEffect(() => {
+   
+  //   const orderUsers = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:4001/api/v1/orders/count");
+  //        if (response.status === 200) {
+  //         const data = await response.json();
+  //         setIsLoading(false)
+  //         setOrderCount(data.orderNumbers);
+  //         console.log(data);
+  //        }
+         
+  //     } catch (error) {
+  //        console.error('Failed to fetch users:', error);
+  //      } finally {
+  //        setIsLoading(false);
+  //     }
+  //   };
+ 
+  //   orderUsers();
+  // }, []);
+
+
+
+
+  // useEffect(() => {
+   
+  //   const productUsers = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:4001/api/v1/products/count");
+  //        if (response.status === 200) {
+  //         const data = await response.json();
+  //         setIsLoading(false)
+  //         setProductCount(data.numbers);
+  //        }
+         
+  //     } catch (error) {
+  //        console.error('Failed to fetch users:', error);
+  //      } finally {
+  //        setIsLoading(false);
+  //     }
+  //   };
+ 
+  //   productUsers();
+  // }, []);
+
   const productSalesData = [
     { name: "Jan", sales: 120 },
     { name: "Feb", sales: 250 },
@@ -47,6 +113,7 @@ const Dashboard = () => {
     { name: "Jul", sales: 280 },
   ];
   const userCount = isLoading ? 0 : users;
+  
 
   return (
     <Box m="0px 0px 0px 20px" overflow="scroll" height="100vh" p="0px 20px 0px 0px">
@@ -68,13 +135,14 @@ const Dashboard = () => {
           <Link to="/orders" style={{ textDecoration: "none" }}>
             <StatBox
               subtitle="Orders"
-              increase="0"
+               increase={orderCount}
               icon={
                 <ShoppingCartIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
                 />
               }
             />
+           
           </Link>
         </Box>
         <Box
@@ -106,7 +174,7 @@ const Dashboard = () => {
           <Link to="/" style={{ textDecoration: "none" }}>
             <StatBox
               subtitle="Track Orders"
-              increase="0"
+              //increase="0"
               icon={
                 <TrackOrderIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -126,7 +194,7 @@ const Dashboard = () => {
           <Link to="/product" style={{ textDecoration: "none" }}>
             <StatBox
               subtitle="Products"
-              increase="0"
+              increase={productCount}
               icon={
                 <Inventory2SharpIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
