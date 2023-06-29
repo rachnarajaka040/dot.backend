@@ -12,11 +12,12 @@ import {
   FormControlLabel,
   FormControl,
   FormLabel,
+  Grid,
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from '../dashboard/images/logo.png';
 import { userSignup } from '../../apis/users';
-import axios from 'axios';
+
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
@@ -35,9 +36,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    [theme.breakpoints.between(412, 1024)]: {
+      marginBottom: theme.spacing(60),
+      marginTop: theme.spacing(1),
+    },
   },
   textField: {
-    margin: theme.spacing(1),
+    
     width: '100%',
     '& label': {
       color: theme.palette.common.white,
@@ -61,36 +66,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Signup = () => {
-    const classes = useStyles();
-    const [data ,setData]=useState({});
-   function handleChange(e){
-    setData({
-      ...data,[e.target.name]:e.target.value
-    })
-    console.log(data);
-    
-  }
-  
-  async function handleFormInput(e){
-   e.preventDefault();
-   console.log(data);
-   userSignup (data);
-   console.log(userSignup(data)+"databse");
-  }
-  // //signup
-  // async function postUserSignUp() {
-  //   try {
-  //     console.log("data1");
-  //     const response = await axios.post(`${process.env.REACT_APP_GET_USER_REGISTER}`,data);
-  //     console.log("data");
-  //     console.log('Response:', response.data);
-  //     return response.data;
-  //   }
-  //   catch (error) { console.error('Error:', error.response.data); throw error; }
-              
-  // }
+  const classes = useStyles();
+  const [data, setData] = useState({});
 
-   return (
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFormInput = (e) => {
+    e.preventDefault();
+    console.log(data);
+    userSignup(data);
+    console.log(userSignup(data) + 'database');
+  };
+
+  return (
     <Box className={classes.container}>
       <Container maxWidth="xs">
         <Box className={classes.formContainer}>
@@ -98,88 +91,98 @@ const Signup = () => {
           <Typography variant="h4" align="center" gutterBottom>
             Signup
           </Typography>
-           <form onSubmit={handleFormInput}>
-            <TextField
-              label="First Name"
-              type="text"
-              className={classes.textField}
-              onChange={handleChange}
-               name="firstName"
-              required
-              InputProps={{
-                style: { color: '#FFFFFF' },
-              }}
-            />
-            <TextField
-              label="Last Name"
-              type="text"
-              className={classes.textField}
-              onChange={handleChange}
-               name="lastName"
-              required
-              InputProps={{
-                style: { color: '#FFFFFF' },
-              }}
-            />
-            <TextField
-              label="Email"
-              type="email"
-              className={classes.textField}
-              onChange={handleChange} 
-              name="email"
-              required
-              InputProps={{
-                style: { color: '#FFFFFF' },
-              }}
-            />
-            <TextField
-              label="Phone Number"
-              type="text"
-              className={classes.textField}
-              onChange={handleChange}
-               name="mobile"
-              required
-              InputProps={{
-                style: { color: '#FFFFFF' },
-              }}
-            />
-            <TextField
-              label="Password"
-              type="password"
-              className={classes.textField}
-              onChange={handleChange}
-               name="password"
-              required
-              InputProps={{
-                style: { color: '#FFFFFF' },
-              }}
-            />
-            <FormControl component="fieldset" className={classes.textField}>
-              <FormLabel component="legend" className={classes.genderLabel}>Gender</FormLabel>
-              <RadioGroup
-                aria-label="gender"
-                name="gender"
-                onChange={handleChange}
-                row
-              >
-                <FormControlLabel
-                  value="male"
-                  control={<Radio color="primary" />}
-                  label="Male"
+          <form onSubmit={handleFormInput}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="First Name"
+                  type="text"
+                  className={classes.textField}
+                  onChange={handleChange}
+                  name="firstName"
+                  required
+                  InputProps={{
+                    style: { color: '#FFFFFF' },
+                  }}
                 />
-                <FormControlLabel
-                  value="female"
-                  control={<Radio color="primary" />}
-                  label="Female"
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Last Name"
+                  type="text"
+                  className={classes.textField}
+                  onChange={handleChange}
+                  name="lastName"
+                  required
+                  InputProps={{
+                    style: { color: '#FFFFFF' },
+                  }}
                 />
-              </RadioGroup>
-            </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Email"
+                  type="email"
+                  className={classes.textField}
+                  onChange={handleChange}
+                  name="email"
+                  required
+                  InputProps={{
+                    style: { color: '#FFFFFF' },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Phone Number"
+                  type="text"
+                  className={classes.textField}
+                  onChange={handleChange}
+                  name="mobile"
+                  required
+                  InputProps={{
+                    style: { color: '#FFFFFF' },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Password"
+                  type="password"
+                  className={classes.textField}
+                  onChange={handleChange}
+                  name="password"
+                  required
+                  InputProps={{
+                    style: { color: '#FFFFFF' },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl component="fieldset" className={classes.textField}>
+                  <FormLabel component="legend" className={classes.genderLabel}>
+                    Gender
+                  </FormLabel>
+                  <RadioGroup aria-label="gender" name="gender" onChange={handleChange} row>
+                    <FormControlLabel
+                      value="male"
+                      control={<Radio color="primary" />}
+                      label="Male"
+                    />
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio color="primary" />}
+                      label="Female"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+            </Grid>
             <Button
               type="submit"
               variant="contained"
               color="primary"
               className={classes.button}
-             
             >
               Signup
             </Button>

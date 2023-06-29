@@ -211,8 +211,8 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
         >
           <Box
-            mt="25px"
-            p="0 30px"
+            mt="15px"
+           
             display="flex"
             justifyContent="space-between"
             alignItems="center"
@@ -246,7 +246,7 @@ const Dashboard = () => {
         </Box> */}
 
             </Box>
-            <SalesChart data={productSalesData} />
+            <SalesChart data={productSalesData}/>
           </Box>
         </Box>
         <Box

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ProSidebar,
   Menu,
@@ -11,14 +11,13 @@ import { Link } from "react-router-dom";
 import 'react-pro-sidebar/dist/css/styles.css';
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CategorySharpIcon from "@mui/icons-material/CategorySharp";
-
 import Person4SharpIcon from "@mui/icons-material/Person4Sharp";
 import RequestQuoteSharpIcon from "@mui/icons-material/RequestQuoteSharp";
 import CategoryIcon from '@material-ui/icons/Category';
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -40,12 +39,29 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
+
+  // Update collapsed state on initial load and window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsCollapsed(window.innerWidth <= 700);
+    };
+
+    handleResize(); // Set initial collapsed state
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Box
       sx={{
+        
+           position: "relative",
+           zIndex:1, // Set z-index value here
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -130,121 +146,86 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-
             <SubMenu
               title="Category"
               icon={<CategoryIcon />}
               defaultOpen={false}
             >
-            <MenuItem>
-              <Link to="/orders">Pent</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/pending">Sarees</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/delivered">T-shirts</Link>
-            </MenuItem>
-          </SubMenu>
+              <MenuItem>
+                <Link to="/orders">Pent</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/orders/pending">Sarees</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/orders/delivered">T-shirts</Link>
+              </MenuItem>
+            </SubMenu>
 
-          <SubMenu
-            title="Orders"
-            icon={<ShoppingCartIcon />}
-            defaultOpen={false}
-          >
-            <MenuItem>
-              <Link to="/orders">All Orders</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/pending">Pending Orders</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/delivered">Delivered Orders</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/delivered">Canceled Orders</Link>
-            </MenuItem>
-          </SubMenu>
+            <SubMenu
+              title="Orders"
+              icon={<ShoppingCartIcon />}
+              defaultOpen={false}
+            >
+              <MenuItem>
+                <Link to="/orders">All Orders</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/orders/pending">Pending Orders</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/orders/delivered">Delivered Orders</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/orders/delivered">Canceled Orders</Link>
+              </MenuItem>
+            </SubMenu>
 
-          <SubMenu
-            title="Products"
-            icon={<CategorySharpIcon />}
-            defaultOpen={false}
-          >
-            <MenuItem>
-              <Link to="/productform">Add Product</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/product">View Product</Link>
-            </MenuItem>
-            
-          </SubMenu>
+            <SubMenu
+              title="Products"
+              icon={<CategorySharpIcon />}
+              defaultOpen={false}
+            >
+              <MenuItem>
+                <Link to="/productform">Add Product</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/product">View Product</Link>
+              </MenuItem>
+            </SubMenu>
 
-          {/* <SubMenu
-            title="Sellers"
-            icon={<StorefrontSharpIcon />}
-            defaultOpen={false}
-          >
-            <MenuItem>
-              <Link to="/orders">All Orders</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/pending">Pending Orders</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/delivered">Delivered Orders</Link>
-            </MenuItem>
-          </SubMenu> */}
+            <SubMenu
+              title="Customer"
+              icon={<Person4SharpIcon />}
+              defaultOpen={false}
+            >
+              <MenuItem>
+                <Link to="/orders">All Orders</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/orders/pending">Pending Orders</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/orders/delivered">Delivered Orders</Link>
+              </MenuItem>
+            </SubMenu>
 
-          {/* <SubMenu
-            title="Delivery Boys"
-            icon={<PersonPinSharpIcon />}
-            defaultOpen={false}
-          >
-            <MenuItem>
-              <Link to="/orders">All Orders</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/pending">Pending Orders</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/delivered">Delivered Orders</Link>
-            </MenuItem>
-          </SubMenu> */}
-
-          <SubMenu
-            title="Customer"
-            icon={<Person4SharpIcon />}
-            defaultOpen={false}
-          >
-            <MenuItem>
-              <Link to="/orders">All Orders</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/pending">Pending Orders</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/orders/delivered">Delivered Orders</Link>
-            </MenuItem>
-          </SubMenu>
-
-          <SubMenu
-            title="Payment"
-            icon={<RequestQuoteSharpIcon />}
-            defaultOpen={false}
-          >
-            <MenuItem>
-              <Link to="/paid">Paid</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/COD">COD</Link>
-            </MenuItem>
-            
-          </SubMenu>
-        </Box>
-      </Menu>
-    </ProSidebar>
-    </Box >
+            <SubMenu
+              title="Payment"
+              icon={<RequestQuoteSharpIcon />}
+              defaultOpen={false}
+            >
+              <MenuItem>
+                <Link to="/paid">Paid</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/COD">COD</Link>
+              </MenuItem>
+            </SubMenu>
+          </Box>
+        </Menu>
+      </ProSidebar>
+    </Box>
   );
 };
 

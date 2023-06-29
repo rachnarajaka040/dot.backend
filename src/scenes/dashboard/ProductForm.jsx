@@ -163,7 +163,7 @@ const ProductForm = () => {
             color="secondary"
             variant="contained"
             sx={{
-              backgroundColor: "white",
+            
               color: "black",
               borderRadius: '4px',
               padding: '5px 12px',

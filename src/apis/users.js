@@ -117,7 +117,7 @@ export const userLogin = async (data) => {
  //signup
  export const userSignup = async (data) => {
     try {
-        const response = await axios.post(`${process.env.REACT_APP_GET_USER_REGISTER}`,data)
+        const response = await axios.post(`${process.env.REACT_APP_GET_USER_REGISTER}`,{...data})
         !response ?
             console.error("there is an error") :
             console.log("error");

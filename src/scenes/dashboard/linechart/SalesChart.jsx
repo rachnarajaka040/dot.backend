@@ -22,10 +22,10 @@ const SalesChart = ({ data }) => {
   };
 
   return (
-    <Box marginTop="40px" marginRight="100px">
+    <Box>
      
-      <LineChart
-        width={isNonMobile ? 400 : 300}
+      <LineChart 
+        width={isNonMobile ? 400 : 250}
         height={isNonMobile ? 200 : 150}
         data={data}
       >
