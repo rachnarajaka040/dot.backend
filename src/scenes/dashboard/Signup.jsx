@@ -5,7 +5,6 @@ import {
   Container,
   Typography,
   makeStyles,
-  Link,
   Box,
   Radio,
   RadioGroup,
@@ -14,7 +13,6 @@ import {
   FormLabel,
   Grid,
 } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
 import Logo from '../dashboard/images/logo.png';
 import { userSignup } from '../../apis/users';
 
@@ -89,7 +87,7 @@ const Signup = () => {
         <Box className={classes.formContainer}>
           <img src={Logo} alt="Company Logo" className={classes.logo} />
           <Typography variant="h4" align="center" gutterBottom>
-            Signup
+            Register
           </Typography>
           <form onSubmit={handleFormInput}>
             <Grid container spacing={2}>
@@ -159,6 +157,19 @@ const Signup = () => {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  label="Role"
+                  type="text"
+                  className={classes.textField}
+                  onChange={handleChange}
+                  name="role"
+                  required
+                  InputProps={{
+                    style: { color: '#FFFFFF' },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControl component="fieldset" className={classes.textField}>
                   <FormLabel component="legend" className={classes.genderLabel}>
                     Gender
@@ -184,14 +195,14 @@ const Signup = () => {
               color="primary"
               className={classes.button}
             >
-              Signup
+            Register
             </Button>
-            <Typography variant="body2" align="center">
+            {/* <Typography variant="body2" align="center">
               Already have an account?{' '}
               <Link component={RouterLink} to="/" className={classes.link}>
                 Login
               </Link>
-            </Typography>
+            </Typography> */}
           </form>
         </Box>
       </Container>

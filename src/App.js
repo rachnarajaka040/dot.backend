@@ -12,9 +12,9 @@ import Setting from "./scenes/dashboard/Setting";
 import Login from "./scenes/dashboard/Login";
 import Signup from "./scenes/dashboard/Signup";
 import { useLocation } from "react-router-dom";
-import Accountent from "./scenes/accountent-dashboard/Accountent";
 import Delivery from "./scenes/delivery-dashboard/Delivery";
 import Seller from "./scenes/seller-dashboard/Seller";
+import Accountent from "./scenes/accountent-dashboard/Accountent";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -31,7 +31,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-        {currentPath!=="/"?<Sidebar isSidebar={isSidebar} />:null}
+        {currentPath!=="/"?<Sidebar isSidebar={isSidebar}  />:null}
+     
+        
           <main className="content">
 
             <Routes>
@@ -47,7 +49,7 @@ function App() {
 
               <Route path="/accountent" element={<Accountent/>} />
               <Route path="/delivery" element={<Delivery />} />
-              <Route path="/seller" element={<Seller/>}/>
+              <Route path="/seller" element={<Seller name="Drift Of Thread" admin=" Seller Admin" tittle="Dashboard" title2="Products" link1="Add Product" link2="View Product"/>}/>
             </Routes>
           </main>
         </div>

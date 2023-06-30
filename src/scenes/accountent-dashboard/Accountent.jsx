@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Account() {
+function Accountent() {
   return (
     <div>Account</div>
   )
 }
 
-export default Account
+export default Accountent
