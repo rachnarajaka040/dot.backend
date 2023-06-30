@@ -211,8 +211,8 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
         >
           <Box
-            mt="15px"
-           
+            mt="35px"
+            mr="75px"
             display="flex"
             justifyContent="space-between"
             alignItems="center"

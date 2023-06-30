@@ -15,6 +15,7 @@ import Dropdown from './Dropdown';
 import { filterUsers } from "../../apis/users.js";
 import { deleteUsers } from "../../apis/users.js";
 import './table.css';
+import { useNavigate } from 'react-router-dom';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: 'rgb(31, 42, 64)',
@@ -56,7 +57,7 @@ export default function CustomizedTables() {
   const [sortOrder, setSortOrder] = useState('asc');
   const [userType, setUserType] = useState('all');
 
-
+    const navigate=useNavigate();
 
   //console.log(getUserUrl);
   // useEffect(() => {
@@ -164,6 +165,11 @@ export default function CustomizedTables() {
     return 0;
   });
 
+  async function handlebutton() {
+    
+    navigate('/signup');
+  }
+
   return (
     <React.Fragment>
 
@@ -177,7 +183,7 @@ export default function CustomizedTables() {
         </StyledTableCell>
         <StyledTableCell>
           <button
-
+           onClick={handlebutton}
             style={{
               borderRadius: '4px',
               padding: '5px 12px',
@@ -187,7 +193,7 @@ export default function CustomizedTables() {
               cursor: 'pointer',
             }}
           >
-            Admin
+            Add new admin
           </button>
         </StyledTableCell>
 

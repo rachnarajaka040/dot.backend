@@ -60,8 +60,7 @@ const Sidebar = () => {
     <Box
       sx={{
         
-           position: "relative",
-           zIndex:1, // Set z-index value here
+           
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
