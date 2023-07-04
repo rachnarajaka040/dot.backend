@@ -108,7 +108,7 @@ export const userLogin = async (data) => {
         const response = await axios.post(`${process.env.REACT_APP_GET_USER_LOGIN}`,data)
         !response ?
             console.error("login field") :
-            console.log("error");
+            console.log(response.data);
     } catch (error) {
         console.error(error);
     }

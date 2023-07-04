@@ -1,6 +1,6 @@
-import { useState } from "react";
+//import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Sidebar from "./scenes/global/Sidebar";
+//import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import CustomizedTables from "./scenes/dashboard/CustomizedTables";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -12,12 +12,14 @@ import Setting from "./scenes/dashboard/Setting";
 import Login from "./scenes/dashboard/Login";
 import Signup from "./scenes/dashboard/Signup";
 import { useLocation } from "react-router-dom";
-import Delivery from "./scenes/delivery-dashboard/Delivery";
-import Seller from "./scenes/seller-dashboard/Seller";
+import Delivery from "./scenes/delivery-dashboard/DeliveryDashboard";
+import Seller from "./scenes/seller-dashboard/SellerSidebar";
 import Accountent from "./scenes/accountent-dashboard/Accountent";
+import SellerDasboard from "./scenes/seller-dashboard/SellerDasboard";
+import DeliveryDasboard from "./scenes/delivery-dashboard/DeliveryDashboard";
 function App() {
   const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
+  // const [isSidebar, setIsSidebar] = useState(true);
   const location=useLocation();
   const currentPath=location.pathname;
   console.log(currentPath);
@@ -31,7 +33,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-        {currentPath!=="/"?<Sidebar isSidebar={isSidebar}  />:null}
+        {/* //{currentPath!=="/"?<Sidebar isSidebar={isSidebar}  />:null} */}
      
         
           <main className="content">
@@ -45,9 +47,10 @@ function App() {
               <Route path="/productform" element={<ProductForm />} />
               <Route path="/setting" element={<Setting />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/sellerdashboard" element={<SellerDasboard/>} />
+              <Route path="/deliverydashboard" element={<DeliveryDasboard/>} />
               <Route path="/signup" element={<Signup/>}/>
-
-              <Route path="/accountent" element={<Accountent/>} />
+               <Route path="/accountent" element={<Accountent/>} />
               <Route path="/delivery" element={<Delivery />} />
               <Route path="/seller" element={<Seller name="Drift Of Thread" admin=" Seller Admin" tittle="Dashboard" title2="Products" link1="Add Product" link2="View Product"/>}/>
             </Routes>

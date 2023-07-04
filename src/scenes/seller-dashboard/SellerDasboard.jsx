@@ -2,18 +2,18 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { useState } from "react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+//import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import TrackOrderIcon from '@material-ui/icons/TrackChanges';
 import Inventory2SharpIcon from '@mui/icons-material/Inventory2Sharp';
 import StatBox from "../../components/StatBox";
 import Topbar from "../global/Topbar";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import SalesChart from "./linechart/SalesChart";
+import SalesChart from "../dashboard/linechart/SalesChart";
 import { countUsers, countOrder, countProduct } from "../../apis/users.js";
-import AdminLayout from "../Layout/AdminLayout";
-
-const Dashboard = () => {
+import Seller from "./SellerSidebar";
+import SellerLayout from "../Layout/SellerLayout";
+const SellerDasboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isSidebar, setIsSidebar] = useState(true);
@@ -116,10 +116,11 @@ const Dashboard = () => {
 
 
   return (
+   
     <div style={{display:"flex"}}>
-    <AdminLayout>
-    <Box m="0px 0px 0px 20px" overflow="scroll" height="100vh" p="0px 20px 0px 0px" width="100%">
-      <Topbar setIsSidebar={setIsSidebar} />
+     <SellerLayout>
+    <Box m="0px 0px 0px 20px" overflow="scroll" height="100vh" p="0px 20px 0px 0px"  width="81vw">
+      <Topbar setIsSidebar={setIsSidebar} /> 
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
@@ -128,7 +129,7 @@ const Dashboard = () => {
       >
         {/* ROW 1 */}
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
+          gridColumn={{ xs: "span 6", sm: "span 3", md: "span 6" }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -147,27 +148,9 @@ const Dashboard = () => {
 
           </Link>
         </Box>
+        
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Link to="/allusers" style={{ textDecoration: "none" }}>
-            <StatBox
-              subtitle="All Users"
-              increase={userCount}
-              icon={
-                <PersonAddAltIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                />
-              }
-            />
-          </Link>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
+          gridColumn={{ xs: "span 6", sm: "span 6", md: "span 3" }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -187,7 +170,7 @@ const Dashboard = () => {
           </Link>
         </Box>
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
+          gridColumn={{ xs: "span 6", sm: "span 6", md: "span 3" }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -207,19 +190,8 @@ const Dashboard = () => {
         </Box>
 
         {/* ROW 2 */}
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
-          gridRow={{ xs: "span 1", sm: "span 2" }}
-          backgroundColor={colors.primary[400]}
-        >
-          <Box
-            mt="35px"
-            mr="75px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box display="flex" justifyContent="space-between" alignItems="center">
+       
+         
 
               {/* <Box marginLeft="210px">
           <Button
@@ -247,10 +219,8 @@ const Dashboard = () => {
           </Button>
         </Box> */}
 
-            </Box>
-            <SalesChart data={productSalesData} />
-          </Box>
-        </Box>
+          
+      
         <Box
           gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 2" }}
@@ -273,7 +243,7 @@ const Dashboard = () => {
 
         {/* ROW 3 */}
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 1.5" }}
           backgroundColor={colors.primary[400]}
           p="30px"
@@ -290,7 +260,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 1.5" }}
           backgroundColor={colors.primary[400]}
         >
@@ -304,7 +274,7 @@ const Dashboard = () => {
           </Typography>
         </Box>
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
           padding="30px"
@@ -373,7 +343,7 @@ const Dashboard = () => {
 
         {/* ROW 5 */}
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
           p="30px"
@@ -390,7 +360,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 1.5" }}
           backgroundColor={colors.primary[400]}
         >
@@ -404,7 +374,7 @@ const Dashboard = () => {
           </Typography>
         </Box>
         <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
           gridRow={{ xs: "span 1", sm: "span 1" }}
           backgroundColor={colors.primary[400]}
           padding="30px"
@@ -472,9 +442,10 @@ const Dashboard = () => {
         </Box>
       </Box>
     </Box>
-    </AdminLayout>
+    </SellerLayout>
     </div>
+    
   );
 };
 
-export default Dashboard;
+export default SellerDasboard;

@@ -9,11 +9,11 @@ import StatBox from "../../components/StatBox";
 import Topbar from "../global/Topbar";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import SalesChart from "./linechart/SalesChart";
+import SalesChart from "../dashboard/linechart/SalesChart";
 import { countUsers, countOrder, countProduct } from "../../apis/users.js";
-import AdminLayout from "../Layout/AdminLayout";
-
-const Dashboard = () => {
+import DeliveryLayout from "../Layout/DeliveryLayout";
+import SellerLayout from "../Layout/SellerLayout";
+const DeliveryDasboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isSidebar, setIsSidebar] = useState(true);
@@ -116,9 +116,10 @@ const Dashboard = () => {
 
 
   return (
+   
     <div style={{display:"flex"}}>
-    <AdminLayout>
-    <Box m="0px 0px 0px 20px" overflow="scroll" height="100vh" p="0px 20px 0px 0px" width="100%">
+     <DeliveryLayout>
+    <Box m="0px 0px 0px 20px" overflow="scroll" height="100vh" p="0px 20px 0px 0px"  width="81vw">
       <Topbar setIsSidebar={setIsSidebar} />
       <Box
         display="grid"
@@ -472,9 +473,10 @@ const Dashboard = () => {
         </Box>
       </Box>
     </Box>
-    </AdminLayout>
+    </DeliveryLayout>
     </div>
+    
   );
 };
 
-export default Dashboard;
+export default DeliveryDasboard;
