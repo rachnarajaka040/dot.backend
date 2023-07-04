@@ -7,13 +7,16 @@ import TrackOrderIcon from '@material-ui/icons/TrackChanges';
 import Inventory2SharpIcon from '@mui/icons-material/Inventory2Sharp';
 import StatBox from "../../components/StatBox";
 import Topbar from "../global/Topbar";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import SalesChart from "./linechart/SalesChart";
 import { countUsers, countOrder, countProduct } from "../../apis/users.js";
 import AdminLayout from "../Layout/AdminLayout";
+import middleware from "../../apis/middleware";
+
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isSidebar, setIsSidebar] = useState(true);
@@ -21,6 +24,8 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [orderCount, setOrderCount] = useState(0);
   const [productCount, setProductCount] = useState(0);
+
+  // useEffect(() => middleware("admin", navigate), [])
 
   useEffect(() => {
 
@@ -116,112 +121,112 @@ const Dashboard = () => {
 
 
   return (
-    <div style={{display:"flex"}}>
-    <AdminLayout>
-    <Box m="0px 0px 0px 20px" overflow="scroll" height="100vh" p="0px 20px 0px 0px" width="100%">
-      <Topbar setIsSidebar={setIsSidebar} />
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="140px"
-        gap="20px"
-      >
-        {/* ROW 1 */}
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Link to="/orders" style={{ textDecoration: "none" }}>
-            <StatBox
-              subtitle="Orders"
-              increase={orderCount}
-              icon={
-                <ShoppingCartIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                />
-              }
-            />
-
-          </Link>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Link to="/allusers" style={{ textDecoration: "none" }}>
-            <StatBox
-              subtitle="All Users"
-              increase={userCount}
-              icon={
-                <PersonAddAltIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                />
-              }
-            />
-          </Link>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <StatBox
-              subtitle="Track Orders"
-              //increase="0"
-              icon={
-                <TrackOrderIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                />
-              }
-            />
-
-          </Link>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Link to="/product" style={{ textDecoration: "none" }}>
-            <StatBox
-              subtitle="Products"
-              increase={productCount}
-              icon={
-                <Inventory2SharpIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                />
-              }
-            />
-          </Link>
-        </Box>
-
-        {/* ROW 2 */}
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
-          gridRow={{ xs: "span 1", sm: "span 2" }}
-          backgroundColor={colors.primary[400]}
-        >
+    <div style={{ display: "flex" }}>
+      <AdminLayout>
+        <Box m="0px 0px 0px 20px" overflow="scroll" height="100vh" p="0px 20px 0px 0px" width="100%">
+          <Topbar setIsSidebar={setIsSidebar} />
           <Box
-            mt="35px"
-            mr="75px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
+            display="grid"
+            gridTemplateColumns="repeat(12, 1fr)"
+            gridAutoRows="140px"
+            gap="20px"
           >
-            <Box display="flex" justifyContent="space-between" alignItems="center">
+            {/* ROW 1 */}
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Link to="/orders" style={{ textDecoration: "none" }}>
+                <StatBox
+                  subtitle="Orders"
+                  increase={orderCount}
+                  icon={
+                    <ShoppingCartIcon
+                      sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                    />
+                  }
+                />
 
-              {/* <Box marginLeft="210px">
+              </Link>
+            </Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Link to="/allusers" style={{ textDecoration: "none" }}>
+                <StatBox
+                  subtitle="All Users"
+                  increase={userCount}
+                  icon={
+                    <PersonAddAltIcon
+                      sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                    />
+                  }
+                />
+              </Link>
+            </Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <StatBox
+                  subtitle="Track Orders"
+                  //increase="0"
+                  icon={
+                    <TrackOrderIcon
+                      sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                    />
+                  }
+                />
+
+              </Link>
+            </Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 3" }}
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Link to="/product" style={{ textDecoration: "none" }}>
+                <StatBox
+                  subtitle="Products"
+                  increase={productCount}
+                  icon={
+                    <Inventory2SharpIcon
+                      sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                    />
+                  }
+                />
+              </Link>
+            </Box>
+
+            {/* ROW 2 */}
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
+              gridRow={{ xs: "span 1", sm: "span 2" }}
+              backgroundColor={colors.primary[400]}
+            >
+              <Box
+                mt="35px"
+                mr="75px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+
+                  {/* <Box marginLeft="210px">
           <Button
             variant="contained"
             color="primary"
@@ -247,232 +252,232 @@ const Dashboard = () => {
           </Button>
         </Box> */}
 
+                </Box>
+                <SalesChart data={productSalesData} />
+              </Box>
             </Box>
-            <SalesChart data={productSalesData} />
-          </Box>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
-          gridRow={{ xs: "span 1", sm: "span 2" }}
-          backgroundColor={colors.primary[400]}
-          overflow="auto"
-        >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
-            colors={colors.grey[100]}
-            p="15px"
-          >
-            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Category Wise Product's Count
-            </Typography>
-          </Box>
-        </Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
+              gridRow={{ xs: "span 1", sm: "span 2" }}
+              backgroundColor={colors.primary[400]}
+              overflow="auto"
+            >
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                borderBottom={`4px solid ${colors.primary[500]}`}
+                colors={colors.grey[100]}
+                p="15px"
+              >
+                <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+                  Category Wise Product's Count
+                </Typography>
+              </Box>
+            </Box>
 
-        {/* ROW 3 */}
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
-          gridRow={{ xs: "span 1", sm: "span 1.5" }}
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h5" fontWeight="600" textAlign="center">
-            Total Earnings
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-          </Box>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
-          gridRow={{ xs: "span 1", sm: "span 1.5" }}
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            textAlign="center"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Admin Earnings
-          </Typography>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
-          gridRow={{ xs: "span 1", sm: "span 1" }}
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            textAlign="center"
-            sx={{ marginBottom: "15px" }}
-          >
-            Seller Earnings
-          </Typography>
-        </Box>
-
-        {/* ROW 4 */}
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
-          gridRow={{ xs: "span 1", sm: "span 1" }}
-          backgroundColor={colors.primary[400]}
-        >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
+            {/* ROW 3 */}
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+              gridRow={{ xs: "span 1", sm: "span 1.5" }}
+              backgroundColor={colors.primary[400]}
+              p="30px"
+            >
+              <Typography variant="h5" fontWeight="600" textAlign="center">
+                Total Earnings
+              </Typography>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                mt="25px"
+              >
+              </Box>
+            </Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+              gridRow={{ xs: "span 1", sm: "span 1.5" }}
+              backgroundColor={colors.primary[400]}
+            >
               <Typography
                 variant="h5"
                 fontWeight="600"
-                color={colors.grey[100]}
+                textAlign="center"
+                sx={{ padding: "30px 30px 0 30px" }}
               >
-                <pre>i  0 Product(s) sold out! <br></br>
-                  More info
-                </pre>
+                Admin Earnings
               </Typography>
             </Box>
-          </Box>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
-          gridRow={{ xs: "span 1", sm: "span 1" }}
-          backgroundColor={colors.primary[400]}
-        >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+              gridRow={{ xs: "span 1", sm: "span 1" }}
+              backgroundColor={colors.primary[400]}
+              padding="30px"
+            >
               <Typography
                 variant="h5"
                 fontWeight="600"
-                color={colors.grey[100]}
+                textAlign="center"
+                sx={{ marginBottom: "15px" }}
               >
-                <pre>i  0 Product(s) low in stock! (Low stock limit 15) <br></br>
-                  More info
-                </pre>
+                Seller Earnings
               </Typography>
             </Box>
-          </Box>
-        </Box>
 
-        {/* ROW 5 */}
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
-          gridRow={{ xs: "span 1", sm: "span 1" }}
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h5" fontWeight="600" textAlign="center">
-            Approved sellers
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-          </Box>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
-          gridRow={{ xs: "span 1", sm: "span 1.5" }}
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            textAlign="center"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Not Approved Sellers
-          </Typography>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
-          gridRow={{ xs: "span 1", sm: "span 1" }}
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            textAlign="center"
-            sx={{ marginBottom: "15px" }}
-          >
-            Deactivated sellers
-          </Typography>
-        </Box>
+            {/* ROW 4 */}
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
+              gridRow={{ xs: "span 1", sm: "span 1" }}
+              backgroundColor={colors.primary[400]}
+            >
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    <pre>i  0 Product(s) sold out! <br></br>
+                      More info
+                    </pre>
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
+              gridRow={{ xs: "span 1", sm: "span 1" }}
+              backgroundColor={colors.primary[400]}
+            >
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    <pre>i  0 Product(s) low in stock! (Low stock limit 15) <br></br>
+                      More info
+                    </pre>
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
 
-        {/* ROW 6 */}
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
-          gridRow={{ xs: "span 1", sm: "span 1" }}
-          backgroundColor={colors.primary[400]}
-        >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
+            {/* ROW 5 */}
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+              gridRow={{ xs: "span 1", sm: "span 1" }}
+              backgroundColor={colors.primary[400]}
+              p="30px"
+            >
+              <Typography variant="h5" fontWeight="600" textAlign="center">
+                Approved sellers
+              </Typography>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                mt="25px"
+              >
+              </Box>
+            </Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+              gridRow={{ xs: "span 1", sm: "span 1.5" }}
+              backgroundColor={colors.primary[400]}
+            >
               <Typography
                 variant="h5"
                 fontWeight="600"
-                color={colors.grey[100]}
+                textAlign="center"
+                sx={{ padding: "30px 30px 0 30px" }}
               >
-                <pre>i  0 Seller(s) pending for approval! <br></br>
-                  More info
-                </pre>
+                Not Approved Sellers
               </Typography>
             </Box>
-          </Box>
-        </Box>
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
-          gridRow={{ xs: "span 1", sm: "span 1" }}
-          backgroundColor={colors.primary[400]}
-        >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 6", md: "span 4" }}
+              gridRow={{ xs: "span 1", sm: "span 1" }}
+              backgroundColor={colors.primary[400]}
+              padding="30px"
+            >
               <Typography
                 variant="h5"
                 fontWeight="600"
-                color={colors.grey[100]}
+                textAlign="center"
+                sx={{ marginBottom: "15px" }}
               >
-                <pre>i  0 Seller(s) disabled! <br></br>
-                  More info
-                </pre>
+                Deactivated sellers
               </Typography>
+            </Box>
+
+            {/* ROW 6 */}
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
+              gridRow={{ xs: "span 1", sm: "span 1" }}
+              backgroundColor={colors.primary[400]}
+            >
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    <pre>i  0 Seller(s) pending for approval! <br></br>
+                      More info
+                    </pre>
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 12", md: "span 6" }}
+              gridRow={{ xs: "span 1", sm: "span 1" }}
+              backgroundColor={colors.primary[400]}
+            >
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    <pre>i  0 Seller(s) disabled! <br></br>
+                      More info
+                    </pre>
+                  </Typography>
+                </Box>
+              </Box>
             </Box>
           </Box>
         </Box>
-      </Box>
-    </Box>
-    </AdminLayout>
+      </AdminLayout>
     </div>
   );
 };

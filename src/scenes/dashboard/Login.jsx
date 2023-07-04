@@ -9,8 +9,6 @@ import {
   Box,
   Grid,
 } from '@material-ui/core';
-import axios from 'axios';
-import { Link as RouterLink } from 'react-router-dom';
 import Logo from '../dashboard/images/logo.png';
 import { userLogin } from '../../apis/users';
 import { useNavigate } from 'react-router-dom';
@@ -31,12 +29,12 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     [theme.breakpoints.between(412, 1024)]: {
-        marginBottom: theme.spacing(60),
-        marginTop: theme.spacing(10),
-      },
+      marginBottom: theme.spacing(60),
+      marginTop: theme.spacing(10),
+    },
   },
   textField: {
-    
+
     width: '100%',
     '& label': {
       color: theme.palette.common.white,
@@ -73,10 +71,10 @@ const Login = () => {
 
   async function handleFormInput(e) {
     e.preventDefault();
-    console.log(data);
-    userLogin(data);
-    console.log(userLogin(data) + 'databse');
-    navigate('/dashboard');
+    // console.log(data);
+    userLogin(data, navigate);
+    // console.log(userLogin(data) + 'databse');
+    // navigate('/dashboard');
   }
 
   return (
@@ -99,7 +97,7 @@ const Login = () => {
                   InputProps={{
                     style: { color: '#FFFFFF' },
                   }}
-                  name="email or phone"
+                  name="email"
                 />
               </Grid>
               <Grid item xs={12}>
