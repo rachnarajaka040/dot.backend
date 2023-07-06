@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './setting.css';
 import axios from 'axios';
+import extractDateFromValue from '../../utils/date';
+import getTimeFromDate from '../../utils/time';
+
 
 function Setting() {
     const [selectedImages, setSelectedImages] = useState([]);
+    const fileInputRef = useRef(null);
+
     const [value, setValue] = useState(0);
-
-
     useEffect(() => {
         const fetchImages = async () => {
             try {
-                const data = await axios("http://localhost:4001/slider/slider/files");
-                !data ?
-                    console.log("failed to fetch") :
-                    setSelectedImages(data.data)
+                const response = await axios.get('http://localhost:4001/slider/slider/files');
+                setSelectedImages(response.data);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
-        }
-        fetchImages()
-    }, [value])
-
+        };
+        fetchImages();
+    }, [value]);
 
     const handleImageDelete = (index) => {
         setSelectedImages((prevImages) => {
@@ -32,26 +32,27 @@ function Setting() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(e);
 
         try {
             const formData = new FormData();
-            formData.append('file', selectedImages[0]); // Use selectedImages instead of e.target.fileInput.files[0]
+            formData.append('file', fileInputRef.current.files[0]);
 
             const response = await axios.post('http://localhost:4001/upload/slide', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            !response ?
-                console.log("error in uploding") :
-                setValue(Math.random());
+
+            if (!response) {
+                console.log("error uploading Image")
+            } else {
+                setValue((prevValue) => prevValue + 1);
+            }
         } catch (error) {
             console.log(error);
         }
     };
 
-    console.log(selectedImages);
     return (
         <div className="setting-container">
             <div className="upload-container">
@@ -62,7 +63,9 @@ function Setting() {
                             id="imageUpload"
                             accept="image/*"
                             name="file"
+                            ref={fileInputRef}
                             multiple
+                            onChange={() => { }}
                         />
                         <i className="fas fa-cloud-upload-alt"></i> Upload Images
                     </label>
@@ -72,7 +75,7 @@ function Setting() {
 
             {selectedImages.length > 0 && (
                 <div>
-                    <h2 className="uploaded-heading" color="white">
+                    <h2 className="uploaded-heading" style={{ color: 'white' }}>
                         Uploaded Images:
                     </h2>
                     <div className="image-container">
@@ -81,11 +84,11 @@ function Setting() {
                                 <div className="image-details">
                                     <div className="detail-row">
                                         <span className="detail-label">Date:</span>
-                                        <span className="detail-value">{new Date().toLocaleDateString()}</span>
+                                        <span className="detail-value">{extractDateFromValue(image.createdAt)}</span>
                                     </div>
                                     <div className="detail-row">
                                         <span className="detail-label">Time:</span>
-                                        <span className="detail-value">{new Date().toLocaleTimeString()}</span>
+                                        <span className="detail-value">{getTimeFromDate(image.createdAt)}</span>
                                     </div>
                                     <div className="detail-row">
                                         <span className="detail-label">Size:</span>
