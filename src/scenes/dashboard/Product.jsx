@@ -9,7 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import { addProduct } from '../../apis/users';
+import { allProduct } from '../../apis/users';
+import AdminLayout from '../Layout/AdminLayout';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: 'rgb(31, 42, 64)',
@@ -61,16 +62,17 @@ export default function Product() {
 
   //addproduct
   useEffect(() => {
-    addProduct(setProducts);
+    allProduct(setProducts);
   }, [])
 
 
 
   return (
-    <React.Fragment>
-      <div style={{ margin: '30px' }} >
+    <div style={{display:"flex"}}>
+    <AdminLayout>
+      <div style={{ margin: '30px',width:"78%"}}>
 
-        <TableContainer >
+        <TableContainer>
           <Table sx={{ minWidth: 300 }} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -169,6 +171,7 @@ export default function Product() {
           </Table>
         </TableContainer>
       </div>
-    </React.Fragment>
+    </AdminLayout>
+    </div>
   );
 }

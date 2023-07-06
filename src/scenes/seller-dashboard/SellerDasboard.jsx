@@ -9,9 +9,8 @@ import StatBox from "../../components/StatBox";
 import Topbar from "../global/Topbar";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import SalesChart from "../dashboard/linechart/SalesChart";
-import { countUsers, countOrder, countProduct } from "../../apis/users.js";
-import Seller from "./SellerSidebar";
+import {countOrder, countProduct } from "../../apis/users.js";
+
 import SellerLayout from "../Layout/SellerLayout";
 const SellerDasboard = () => {
   const theme = useTheme();
@@ -22,26 +21,7 @@ const SellerDasboard = () => {
   const [orderCount, setOrderCount] = useState(0);
   const [productCount, setProductCount] = useState(0);
 
-  useEffect(() => {
-
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_GET_USER_COUNT}`);
-        if (response.status === 200) {
-          const data = await response.json();
-          setIsLoading(false)
-          setUsers(data.numbers);
-        }
-
-      } catch (error) {
-        console.error('Failed to fetch users:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []);
+  
 
   useEffect(() => {
 
@@ -53,9 +33,9 @@ const SellerDasboard = () => {
   //   countUsers(setUsers);
   //  },[])
 
-  useEffect(() => {
-    countProduct(setProductCount);
-  }, [])
+  // useEffect(() => {
+  //   countProduct(setProductCount);
+  // }, [])
 
   // useEffect(() => {
 
@@ -82,26 +62,26 @@ const SellerDasboard = () => {
 
 
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const productUsers = async () => {
-  //     try {
-  //       const response = await fetch("http://localhost:4001/api/v1/products/count");
-  //        if (response.status === 200) {
-  //         const data = await response.json();
-  //         setIsLoading(false)
-  //         setProductCount(data.numbers);
-  //        }
+    const productUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:4001/api/v1/products/count");
+         if (response.status === 200) {
+          const data = await response.json();
+          setIsLoading(false)
+          setProductCount(data.numbers);
+         }
 
-  //     } catch (error) {
-  //        console.error('Failed to fetch users:', error);
-  //      } finally {
-  //        setIsLoading(false);
-  //     }
-  //   };
+      } catch (error) {
+         console.error('Failed to fetch users:', error);
+       } finally {
+         setIsLoading(false);
+      }
+    };
 
-  //   productUsers();
-  // }, []);
+    productUsers();
+  }, []);
 
   const productSalesData = [
     { name: "Jan", sales: 120 },

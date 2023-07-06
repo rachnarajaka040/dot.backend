@@ -53,9 +53,9 @@ const DeliveryDasboard = () => {
   //   countUsers(setUsers);
   //  },[])
 
-  useEffect(() => {
-    countProduct(setProductCount);
-  }, [])
+  // useEffect(() => {
+  //   countProduct(setProductCount);
+  // }, [])
 
   // useEffect(() => {
 
@@ -82,26 +82,26 @@ const DeliveryDasboard = () => {
 
 
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const productUsers = async () => {
-  //     try {
-  //       const response = await fetch("http://localhost:4001/api/v1/products/count");
-  //        if (response.status === 200) {
-  //         const data = await response.json();
-  //         setIsLoading(false)
-  //         setProductCount(data.numbers);
-  //        }
+    const productUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:4001/api/v1/products/count");
+         if (response.status === 200) {
+          const data = await response.json();
+          setIsLoading(false)
+          setProductCount(data.numbers);
+         }
 
-  //     } catch (error) {
-  //        console.error('Failed to fetch users:', error);
-  //      } finally {
-  //        setIsLoading(false);
-  //     }
-  //   };
+      } catch (error) {
+         console.error('Failed to fetch users:', error);
+       } finally {
+         setIsLoading(false);
+      }
+    };
 
-  //   productUsers();
-  // }, []);
+    productUsers();
+  }, []);
 
   const productSalesData = [
     { name: "Jan", sales: 120 },

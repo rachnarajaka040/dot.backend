@@ -16,6 +16,7 @@ import { filterUsers } from "../../apis/users.js";
 import { deleteUsers } from "../../apis/users.js";
 import './table.css';
 import { useNavigate } from 'react-router-dom';
+import AdminLayout from '../Layout/AdminLayout';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: 'rgb(31, 42, 64)',
@@ -171,9 +172,10 @@ export default function CustomizedTables() {
   }
 
   return (
-    <React.Fragment>
+    <div style={{display:"flex"}}>
+    <AdminLayout>
 
-      <div style={{ margin: '20px' }}>
+      <div style={{ margin: '30px',width:"78%"}}>
         <StyledTableCell>
           <Dropdown onChanger={handleDropdownChange} update={userType} data={[
             { value: "all", name: "All" },
@@ -374,6 +376,7 @@ export default function CustomizedTables() {
           </button>
         </div>
       </Modal>
-    </React.Fragment>
+    </AdminLayout>
+    </div>
   );
 }

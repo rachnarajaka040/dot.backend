@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import DownloadIcon from '@mui/icons-material/Download';
+import AdminLayout from '../Layout/AdminLayout';
 import { fetchOrders, downloadInvoice } from '../../apis/users'; // Assuming you have the downloadInvoice API function
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,31 +42,31 @@ export default function OrdersTable() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchOrders = async () => {
-  //     try {
-  //       const response = await fetch(`${process.env.REACT_APP_GET_USER_ORDER}`);
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setOrders(data);
-  //         console.log('fetch the data');
-  //       } else {
-  //         throw new Error('Failed to fetch orders.');
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch("http://localhost:4001/api/v1/orders/orders");
+        if (response.ok) {
+          const data = await response.json();
+          setOrders(data);
+          console.log('fetch the data');
+        } else {
+          throw new Error('Failed to fetch orders.');
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  //   fetchOrders();
-  // }, []);
+    fetchOrders();
+  }, []);
 
   //orderproduct
-  useEffect(() => {
-    fetchOrders(setOrders);
-  }, [])
+  // useEffect(() => {
+  //   fetchOrders(setOrders);
+  // }, [])
 
   const handleDownloadInvoice = async (orderId) => {
     try {
@@ -76,8 +77,9 @@ export default function OrdersTable() {
   };
   
   return (
-    <React.Fragment>
-      <div style={{ margin: '20px' }}>
+    <div style={{display:"flex"}}>
+    <AdminLayout>
+      <div style={{ margin: '30px',width:"78%"}}>
 
         <TableContainer>
           <Table sx={{ minWidth: 400 }} aria-label="customized table">
@@ -120,6 +122,7 @@ export default function OrdersTable() {
           </Table>
         </TableContainer>
       </div>
-    </React.Fragment>
+    </AdminLayout>
+    </div>
   );
 }

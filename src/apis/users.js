@@ -1,5 +1,4 @@
 import axios from "axios";
-import { redirect } from "react-router-dom";
 
 
 //get alluser
@@ -52,7 +51,7 @@ export const countOrder = async (updater) => {
         console.log(response, updater);
         !response ?
             console.error("there is an error") :
-            updater(response.data.ordernumbers);
+            updater(response.data.numbers);
 
         // updater(response.data.numbers);
     } catch (error) {
@@ -90,9 +89,9 @@ export const fetchOrders = async (updater) => {
 }
 
 
-//add products
+//get all product
 
-export const addProduct = async (updater) => {
+export const allProduct = async (updater) => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_GET_USER_PRODUCT}`)
         !response ?
@@ -123,11 +122,26 @@ export const userSignup = async (data) => {
         const response = await axios.post(`${process.env.REACT_APP_GET_USER_REGISTER}`, { ...data })
         !response ?
             console.error("there is an error") :
-            console.log("error");
+            console.log(response.data);
     } catch (error) {
         console.error(error);
     }
 }
+
+//add product
+export const addProduct = async (data) => {
+    try {
+        const response = await axios.post(`${process.env.REACT_APP_GET_PRODUCT_ADD}`, { ...data })
+        !response ?
+            console.error("there is an error") :
+            console.log(response.data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+
 
 //
 // export const downloadInvoice = async (downloadPath) => {

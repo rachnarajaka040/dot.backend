@@ -151,13 +151,13 @@ const Sidebar = () => {
               defaultOpen={false}
             >
               <MenuItem>
-                <Link to="/orders">Pent</Link>
+                <Link to="">Pent</Link>
               </MenuItem>
               <MenuItem>
-                <Link to="/orders/pending">Sarees</Link>
+                <Link to="">Sarees</Link>
               </MenuItem>
               <MenuItem>
-                <Link to="/orders/delivered">T-shirts</Link>
+                <Link to="">T-shirts</Link>
               </MenuItem>
             </SubMenu>
 
