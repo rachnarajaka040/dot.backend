@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './setting.css';
 import axios from 'axios';
 
 function Setting() {
     const [selectedImages, setSelectedImages] = useState([]);
+    const [value, setValue] = useState(0);
 
-    const handleImageUpload = (event) => {
-        const files = event.target.files;
-        const imageArray = Array.from(files).map((file) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                file.dataURL = reader.result;
-                setSelectedImages((prevImages) => [...prevImages, file]);
-            };
-            return file;
-        });
-    };
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const data = await axios("http://localhost:4001/slider/slider/files");
+                !data ?
+                    console.log("failed to fetch") :
+                    setSelectedImages(data.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchImages()
+    }, [value])
+
 
     const handleImageDelete = (index) => {
         setSelectedImages((prevImages) => {
@@ -39,13 +43,15 @@ function Setting() {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-
-            console.log(response);
+            !response ?
+                console.log("error in uploding") :
+                setValue(Math.random());
         } catch (error) {
             console.log(error);
         }
     };
 
+    console.log(selectedImages);
     return (
         <div className="setting-container">
             <div className="upload-container">
@@ -57,7 +63,6 @@ function Setting() {
                             accept="image/*"
                             name="file"
                             multiple
-                            onChange={handleImageUpload}
                         />
                         <i className="fas fa-cloud-upload-alt"></i> Upload Images
                     </label>
@@ -90,7 +95,7 @@ function Setting() {
                                         Delete
                                     </button>
                                 </div>
-                                <img src={image.dataURL} alt={`Uploaded ${index + 1}`} className="image" />
+                                <img src={image.slidePath} alt={`Uploaded ${index + 1}`} className="image" />
                             </div>
                         ))}
                     </div>
